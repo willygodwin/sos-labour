@@ -1,0 +1,29 @@
+{
+  "name": "project-2-legends",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willygodwin/project-2-legends.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willygodwin/project-2-legends/issues"
+  },
+  "homepage": "https://github.com/willygodwin/project-2-legends#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
+  }
+}
