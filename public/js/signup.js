@@ -31,38 +31,53 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    function signUpUser(email, password, user_type) {
-        console.log(email, password, user_type)
-        fetch(`/api/signup`, {
-            method: 'POST',
-            headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            },
+    // function signUpUser(email, password, user_type) {
+    //     console.log(email, password, user_type)
+    //     fetch(`api/signup`, {
+    //         method: 'POST',
+    //         headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json',
+    //         },
     
-            // make sure to serialize the JSON body
-            body: JSON.stringify({
-                email,
-                password, 
-                user_type
-            }),
-            }).then((response) => {
-                // Check that the response is all good
-                // Reload the page so the user can see the new quote
-                if (response.ok) {
-                    if(user_type === "labourer"){
-                        window.location.replace("/labourerdetails");
-                    }
-                    else if (user_type === "company"){
-                        window.location.replace("/companydetails")
-                    }
+    //         // make sure to serialize the JSON body
+    //         body: JSON.stringify({
+    //             email,
+    //             password, 
+    //             user_type
+    //         }),
+    //         }).then((response) => {
+    //             // Check that the response is all good
+    //             // Reload the page so the user can see the new quote
+    //             if (response.ok) {
+    //                 if(user_type === "labourer"){
+    //                     window.location.replace("/labourerdetails");
+    //                 }
+    //                 else if (user_type === "company"){
+    //                     window.location.replace("/companydetails")
+    //                 }
                    
-                    // If there's an error, log the error
-                } else {
-                    alert('something went wrong!');
-                }
-            }).catch(handleLoginErr);
-    }
+    //                 // If there's an error, log the error
+    //             } else {
+    //                 alert('something went wrong!');
+    //             }
+    //         }).catch(handleLoginErr);
+    // }
+
+    function signUpUser(email, password, user_type) {
+        $.post("/api/signup", {
+          email: email,
+          password: password,
+          user_type: user_type
+        })
+          .then(function(data) {
+            window.location.replace("/labourerdetails");
+            // If there's an error, handle it by throwing up a bootstrap alert
+          })
+          .catch(handleLoginErr);
+      }
+    
+
 
     function handleLoginErr(err) {
         const alert = document.querySelector("#alert .msg")

@@ -1,11 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
     const Labourer = sequelize.define("Labourer", {
-        id:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         first_name:{
             type: DataTypes.STRING(25),
             allowNull: false,

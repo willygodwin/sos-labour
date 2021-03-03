@@ -1,11 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
     const Company = sequelize.define("Company", {
-        id:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         company_name:{
             type: DataTypes.STRING(50),
             allowNull: false,
