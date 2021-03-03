@@ -16,6 +16,39 @@ module.exports = function(app) {
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
+      password: req.body.password,
+      user_type: req.body.user_type
+
+    })
+      .then(function() {
+        if (req.body.user_type === "company") {
+          res.redirect(307, "/api/companydetails");
+        }
+        else if (req.body.user_type === "labourer" ) {
+          res.redirect(307, "/api/labourerdetails")
+        }
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/labourerdetails", function(req, res) {
+    db.Labourer.create({
+      email: req.body.email,
+      password: req.body.password
+    })
+      .then(function() {
+        res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/companydetails", function(req, res) {
+    db.Company.create({
+      email: req.body.email,
       password: req.body.password
     })
       .then(function() {
