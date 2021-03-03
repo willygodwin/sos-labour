@@ -14,6 +14,7 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
+    console.log(req.body.email, req.body.password, req.body.user_type)
     db.User.create({
       email: req.body.email,
       password: req.body.password,
@@ -21,43 +22,57 @@ module.exports = function(app) {
 
     })
       .then(function() {
+        console.log("sucesss")
+        console.log(req.body.user_type)
         if (req.body.user_type === "company") {
-          res.redirect(307, "/api/companydetails");
+          console.log(req.body.user_type)
+          res.redirect("/companydetails");
+          
         }
-        else if (req.body.user_type === "labourer" ) {
-          res.redirect(307, "/api/labourerdetails")
+        else if (req.body.user_type === "labourer") {
+          console.log(req.body.user_type)
+          res.redirect("/labourerdetails")
+          
         }
+      })
+      .catch(function(err) {
+        console.log("fail")
+        console.log(err)
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/labourerdetails", function(req, res) {
+    console.log(req.body.first_name, req.body.last_name, req.body.dob, req.body.driver_license, req.body.whitecard, req.body.skills_experience)
+    db.Labourer.create({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name, 
+      dob: req.body.dob,
+      driver_license: req.body.driver_license ,
+      whitecard: req.body.whitecard, 
+      skills_experience: req.body.skills_experience
+    })
+      .then(function() {
+        res.redirect(307, "/api/login");
       })
       .catch(function(err) {
         res.status(401).json(err);
       });
   });
 
-  // app.post("/api/labourerdetails", function(req, res) {
-  //   db.Labourer.create({
-  //     email: req.body.email,
-  //     password: req.body.password
-  //   })
-  //     .then(function() {
-  //       res.redirect(307, "/api/login");
-  //     })
-  //     .catch(function(err) {
-  //       res.status(401).json(err);
-  //     });
-  // });
-
-  // app.post("/api/companydetails", function(req, res) {
-  //   db.Company.create({
-  //     email: req.body.email,
-  //     password: req.body.password
-  //   })
-  //     .then(function() {
-  //       res.redirect(307, "/api/login");
-  //     })
-  //     .catch(function(err) {
-  //       res.status(401).json(err);
-  //     });
-  // });
+  app.post("/api/companydetails", function(req, res) {
+    console.log(req.body.company_name, req.body.abn)
+    db.Company.create({
+      company_name: req.body.company_name,
+      abn: req.body.abn
+    })
+      .then(function() {
+        res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 
   // Route for logging user out
   app.get("/logout", function(req, res) {

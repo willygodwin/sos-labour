@@ -19,28 +19,21 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h2>Sign Up Form</h2>
+        <h2>Company Details Form</h2>
         <form class="signup">
           <div class="form-group">
-            <label for="email-input">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email">
+            <label for="company-name">Company Name</label>
+            <input type="text" class="form-control" id="company-name" name="company_name">
           </div>
           <div class="form-group">
-            <label for="password-input">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <label for="usertype-input">Are you a labourer or company?</label>
-            <select class="form-control" id="usertype-input" name="user_type">
-              <option value="labourer">Labourer</option>
-              <option value="company">Company</option>
-            </select>
+            <label for="ABN">Australian Business Number</label>
+            <input type="text" class="form-control" id="ABN" name="abn">
           </div>
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
           </div>
-          <button type="submit" class="btn btn-default btn-submit-user">Sign Up</button>
+          <button type="submit" class="btn btn-default btn-submit-company">Sign Up</button>
         </form>
         <br />
         <p>Or log in <a href="/login">here</a></p>
@@ -49,7 +42,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/signup.js"></script>
+  <script type="text/javascript" src="js/companydetails.js"></script>
 
 </body>
 
