@@ -12,7 +12,7 @@ const router = require(path.join(__dirname,'routes','routes.js'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,'public')));
-app.use(router);
+
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -26,6 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
 // Requiring our routes
+app.use(router);
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 

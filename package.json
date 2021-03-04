@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -24,14 +24,10 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-<<<<<<< HEAD
-    "mysql2": "^2.2.5",
-=======
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
->>>>>>> c9ed394e3a12d4cc0f8d86bbbcb07fdf8cd57a5d
     "sequelize": "^6.5.0"
   },
   "devDependencies": {

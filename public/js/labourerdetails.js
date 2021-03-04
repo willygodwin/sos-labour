@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
                     
-                    window.location.href = "/members"; // if all good have to send the user to their dashboard
+                    window.location.href = "/"; // if all good have to send the user to their dashboard
 
                     // If there's an error, log the error
                 } else {

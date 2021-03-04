@@ -14,7 +14,15 @@ if (window.location.pathname === '/employers/dashboard'){
 }
 
 // JS to run when rendering HTML /employers/viewjob/:jobid
-const jobId = document.querySelector('.card-header').getAttribute('data-jobid');
+let jobid;
+if(document.querySelector('.card-header')){
+    jobId = document.querySelector('.card-header').getAttribute('data-jobid');
+   
+}else{
+    jobId;
+    
+}
+
 if(window.location.pathname === `/employers/viewjob/${jobId}`){
     const updateJob = (job) => 
         fetch(`/api/updatejob/${job.id}`,{
