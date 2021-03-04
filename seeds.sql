@@ -1,6 +1,6 @@
 USE project2_development;
 
-INSERT INTO users (user_type,username,password) VALUES
+INSERT INTO users (user_type,email,password) VALUES
 ('company','zorzi@zorzi.com.au','zorzihomes'),
 ('company','summithomes@summithomes.com.au','summithomes'),
 ('labourer','vincent@gmail.com','vincentsumargo'),
