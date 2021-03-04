@@ -24,16 +24,8 @@ module.exports = function(app) {
       .then(function() {
         console.log("sucesss")
         console.log(req.body.user_type)
-        if (req.body.user_type === "company") {
-          console.log(req.body.user_type)
-          res.redirect("/companydetails");
-          
-        }
-        else if (req.body.user_type === "labourer") {
-          console.log(req.body.user_type)
-          res.redirect("/labourerdetails")
-          
-        }
+        res.redirect(307, "/api/login");
+        
       })
       .catch(function(err) {
         console.log("fail")
@@ -43,17 +35,19 @@ module.exports = function(app) {
   });
 
   app.post("/api/labourerdetails", function(req, res) {
-    console.log(req.body.first_name, req.body.last_name, req.body.dob, req.body.driver_license, req.body.whitecard, req.body.skills_experience)
+    console.log(req.body.first_name, req.body.last_name, req.body.dob, req.body.driver_license, 
+      req.body.whitecard, req.body.skills_experience)
     db.Labourer.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name, 
       dob: req.body.dob,
       driver_license: req.body.driver_license ,
       whitecard: req.body.whitecard, 
-      skills_experience: req.body.skills_experience
+      skills_experience: req.body.skills_experience,
+      UserId: req.body.UserId
     })
       .then(function() {
-        res.redirect("/login");
+        res.redirect("/members");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -61,13 +55,14 @@ module.exports = function(app) {
   });
 
   app.post("/api/companydetails", function(req, res) {
-    console.log(req.body.company_name, req.body.abn)
+    console.log(req.body.company_name, req.body.abn, req.body.UserId )
     db.Company.create({
       company_name: req.body.company_name,
-      abn: req.body.abn
+      abn: req.body.abn, 
+      UserId: req.body.UserId
     })
       .then(function() {
-        res.redirect(307, "/login");
+        res.redirect("/members");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -82,6 +77,7 @@ module.exports = function(app) {
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
+    console.log(req.user)
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});

@@ -22,15 +22,15 @@
         <h2>Labourer Details Form</h2>
         <form class="signup">
           <div class="form-group">
-            <label for="first-name">First Name</label>
+            <label for="first-name">First Name *</label>
             <input type="text" class="form-control" id="first-name" name="first_name">
           </div>
           <div class="form-group">
-            <label for="last-name">Last Name</label>
+            <label for="last-name">Last Name *</label>
             <input type="text" class="form-control" id="last-name" name="last_name">
           </div>
           <div class="form-group">
-            <label for="date-input">Date of Birth</label>
+            <label for="date-input">Date of Birth *</label>
             <input type="date" class="form-control" id="date-input" name="dob">
           </div>
           <div class="form-group">
@@ -38,7 +38,7 @@
             <input type="text" class="form-control" id="driver-license" name="driver_license">
           </div>
           <div class="form-group">
-            <label for="white-card">White Card Number</label>
+            <label for="white-card">White Card Number *</label>
             <input type="text" class="form-control" id="white-card" name="whitecard">
           </div>
           <div class="form-group">
@@ -47,7 +47,7 @@
           </div>
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
+            <span class="sr-only">Error:</span> <span class="msg">  Please fill in all the compulsory fields</span>
           </div>
           <button type="submit" class="btn btn-default btn-submit-labourer">Sign Up</button>
         </form>

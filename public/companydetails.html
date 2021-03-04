@@ -22,16 +22,16 @@
         <h2>Company Details Form</h2>
         <form class="signup">
           <div class="form-group">
-            <label for="company-name">Company Name</label>
+            <label for="company-name">Company Name *</label>
             <input type="text" class="form-control" id="company-name" name="company_name">
           </div>
           <div class="form-group">
-            <label for="ABN">Australian Business Number</label>
+            <label for="ABN">Australian Business Number *</label>
             <input type="text" class="form-control" id="ABN" name="abn">
           </div>
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
+            <span class="sr-only">Error:</span> <span class="msg">  Please fill in all the compulsory fields</span>
           </div>
           <button type="submit" class="btn btn-default btn-submit-company">Sign Up</button>
         </form>

@@ -12,25 +12,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     signUpForm.addEventListener('click', (event) => {
         console.log('test');
         event.preventDefault();
-        const userData = {
-            company_name: companyNameInput.value.trim(),
-            abn: abnInput.value.trim(),
 
-        };
-        if (!userData.company_name || !userData.abn) {
-            return;
-        }
+        fetch("/api/user_data")
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data.email, data.id)
+            const userData = {
+                company_name: companyNameInput.value.trim(),
+                abn: abnInput.value.trim(),
+                UserId: data.id
 
-            // If we have an email and password we run the loginUser function and clear the form
-        signUpCompany(userData);
-        companyNameInput.value = "";
-        abnInput.value= "";
+            };
+            if (!userData.company_name || !userData.abn) {
+                document.getElementById('alert').style.display = "block"
+                return;
+            }
 
+                // If we have an email and password we run the loginUser function and clear the form
+            signUpCompany(userData);
+            companyNameInput.value = "";
+            abnInput.value= "";
+        });
        
 
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    function signUpCompany({company_name, abn}) {
+    function signUpCompany({company_name, abn, UserId}) {
         console.log(company_name, abn)
         fetch(`/api/companydetails`, {
             method: 'POST',
@@ -43,6 +50,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             body: JSON.stringify({
                 company_name,
                 abn, 
+                UserId
 
             }),
             }).then((response) => {
@@ -50,7 +58,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
                     
-                    window.location.href = "/login"; // if all good have to send the user to their dashboard
+                    window.location.href = "/members"; // if all good have to send the user to their dashboard
 
                     // If there's an error, log the error
                 } else {
