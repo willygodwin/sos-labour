@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     signUpForm.addEventListener('click', (event) => {
         console.log('test');
+        console.log('first name', firstNameInput.value.trim(),lastNameInput.value.trim(),dobInput.value.trim(),driversLicenseInput.value.trim(), WhiteCardInput.value.trim(),skillsInput.value.trim() )
         event.preventDefault();
         const userData = {
             first_name: firstNameInput.value.trim(),
@@ -23,12 +24,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             whitecard: WhiteCardInput.value.trim(), 
             skills_experience: skillsInput.value.trim()
         };
-        if (!userData.email || !userData.password) {
+        if (!userData.first_name || !userData.last_name || !userData.dob || !userData.whitecard) {
             return;
         }
 
             // If we have an email and password we run the loginUser function and clear the form
-        signUpLabourer({ userData });
+        signUpLabourer( userData);
         firstNameInput.value = "";
         lastNameInput.value= "";
         dobInput.value= "";
@@ -39,9 +40,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    function signUpLabourer(first_name, last_name, dob, driver_license, whitecard, skills_experience ) {
+    function signUpLabourer( { first_name, last_name, dob, driver_license, whitecard, skills_experience }) {
         console.log(first_name, last_name, dob, driver_license, whitecard, skills_experience )
-        fetch(`api/labourerdetails`, {
+        fetch(`/api/labourerdetails`, {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -71,21 +72,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
             }).catch(handleLoginErr);
     }
-
-    // function signUpUser(email, password, user_type) {
-    //     $.post("/api/signup", {
-    //       email: email,
-    //       password: password,
-    //       user_type: user_type
-    //     })
-    //       .then(function(data) {
-    //         // window.location.replace("/labourerdetails");
-    //         // If there's an error, handle it by throwing up a bootstrap alert
-    //       })
-    //       .catch(handleLoginErr);
-    //   }
-    
-
 
     function handleLoginErr(err) {
         const alert = document.querySelector("#alert .msg")

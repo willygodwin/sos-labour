@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         driver_license:{
             type: DataTypes.STRING(12),
-            allowNull:false,
+            allowNull:true,
             defaultValue: false,
         },
         whitecard:{

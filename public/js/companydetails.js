@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             abn: abnInput.value.trim(),
 
         };
-        if (!userData.email || !userData.password) {
+        if (!userData.company_name || !userData.abn) {
             return;
         }
 
             // If we have an email and password we run the loginUser function and clear the form
-        signUpCompany({ userData });
+        signUpCompany(userData);
         companyNameInput.value = "";
         abnInput.value= "";
 
@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    function signUpCompany(company_name, abn) {
+    function signUpCompany({company_name, abn}) {
         console.log(company_name, abn)
-        fetch(`api/companydetails`, {
+        fetch(`/api/companydetails`, {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -58,21 +58,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
             }).catch(handleLoginErr);
     }
-
-    // function signUpUser(email, password, user_type) {
-    //     $.post("/api/signup", {
-    //       email: email,
-    //       password: password,
-    //       user_type: user_type
-    //     })
-    //       .then(function(data) {
-    //         // window.location.replace("/labourerdetails");
-    //         // If there's an error, handle it by throwing up a bootstrap alert
-    //       })
-    //       .catch(handleLoginErr);
-    //   }
-    
-
 
     function handleLoginErr(err) {
         const alert = document.querySelector("#alert .msg")

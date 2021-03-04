@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
     function signUpUser(email, password, user_type) {
         console.log(email, password, user_type)
-        fetch(`api/signup`, {
+        fetch(`/api/signup`, {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
                     if(user_type === "labourer"){
+                        console.log(user_type)
                         window.location.href = "/labourerdetails";
                     }
                     else if (user_type === "company"){

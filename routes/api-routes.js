@@ -53,7 +53,7 @@ module.exports = function(app) {
       skills_experience: req.body.skills_experience
     })
       .then(function() {
-        res.redirect(307, "/api/login");
+        res.redirect("/login");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -67,7 +67,7 @@ module.exports = function(app) {
       abn: req.body.abn
     })
       .then(function() {
-        res.redirect(307, "/api/login");
+        res.redirect(307, "/login");
       })
       .catch(function(err) {
         res.status(401).json(err);
