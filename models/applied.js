@@ -1,12 +1,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     const Applied = sequelize.define("Applied", {
-        id:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
+
         chosen:{
             type: DataTypes.BOOLEAN,
             allowNull: true,
