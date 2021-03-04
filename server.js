@@ -1,26 +1,32 @@
 // Requiring necessary npm packages
-const express = require("express");
 require("dotenv").config();
+const path = require('path');
+const express = require('express');
 const session = require("express-session");
 // Requiring passport as we've configured it
-const passport = require("./config/passport");
-const db = require("./models");
-
-// Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
-
-
-// Creating express app and configuring middleware needed for authentication
+const passport = require(path.join(__dirname,'config','passport'));
 const app = express();
+const db = require(path.join(__dirname,'models'));
+const router = require(path.join(__dirname,'routes','routes.js'));
+// Creating express app and configuring middleware needed for authentication
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname,'public')));
+
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Setting up port and requiring models for syncing
+const PORT = process.env.PORT || 8080;
+
+// app.engine('ejs', ejs({ defaultLayout: 'main' }));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'views'));
+
 // Requiring our routes
+app.use(router);
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 
