@@ -15,6 +15,9 @@ if (window.location.pathname === '/labourers/jobsearch'){
                 // Check that the response is all good
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
+
+                    //change the css of that card to make it green
+                    //add a delete request if the job wants to un apply
                     
                     console.log("successs")// if all good have to send the user to their dashboard
     
