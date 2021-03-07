@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
+const { route } = require('../apiRoutes/apiRoutes');
 
 // html route to display employer/company dashboard after they log-in
 
@@ -69,5 +70,18 @@ router.get('/labourers/dashboard', (req,res) => {
     })
     .catch((err) => console.log(err));
 });
+
+router.get('/labourers/jobsearch', (req,res) => {
+    db.Job.findAll({where: {job_status: "open"}})
+    .then((data) => {
+        console.log(data);
+        // res.json({success:true});
+        res.render('jobSearch',{jobs: data});
+        
+    })
+    .catch((err) => console.log(err));
+})
+
+
 
 module.exports = router

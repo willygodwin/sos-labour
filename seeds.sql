@@ -1,12 +1,12 @@
 USE project2_development;
 
 INSERT INTO users (user_type,email,password) VALUES
-('company','zorzi@zorzi.com.au','zorzihomes'),
-('company','summithomes@summithomes.com.au','summithomes'),
-('labourer','vincent@gmail.com','vincentsumargo'),
-('labourer','will@gmail.com','willgodwin'),
-('labourer','naresh@gmail.com','naresh1234'),
-('labourer','ayshaa@gmail.com','ayshaa6789'),
+('company','zorzi@zorzi.com.au','$2a$10$g92sB9YAdqUhha5uJcfTpOcST5g30y2lzLWsDL3a/4rWT8qtxsy.K'), -- password: zorzihomes
+('company','summithomes@summithomes.com.au','$2a$10$etuJLD29Ws9VYMyXAdoT5u8OIZTpqW74xUluXvYzDBWWK5oN3uOLC'), -- password: summithomes
+('labourer','vincent@gmail.com','$2a$10$s1rwa7y3s0Yojnnb9dz4Fuwp1qTh.at..6TmJpIsAG.3K9r5Ywk6S'), -- password: vince
+('labourer','will@gmail.com','$2a$10$B6B8bpbtEwGvdymEbQ7xdeKXw/FRTl9xs9thBss4rtAJi7idvJgaS'), -- password: will
+('labourer','naresh@gmail.com','$2a$10$TFrvxvL3Vtbt4IRvianc4.pbbvMvj50u76RESOsKhhPAFrBDhbqmy'), -- password: naresh
+('labourer','ayshaa@gmail.com','$2a$10$Tevp.DcxsdAQ4MUN546EouY4lBDbIO2o2evt8UhTPq5sLV3XBOnPi'), -- password: aysha
 
 
 INSERT INTO companies (company_name,abn,UserId) VALUES

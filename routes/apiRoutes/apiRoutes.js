@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const { Op } = require('sequelize');
+var passport = require("../../config/passport");
 
 // api routes to update posted job by employer/company
 router.put('/api/updatejob/:jobid', (req,res) => {
@@ -72,6 +73,9 @@ router.put('/api/applicantschosenfor/:jobid', (req,res) => {
     }
     
 })
+
+
+
 
 
 module.exports = router

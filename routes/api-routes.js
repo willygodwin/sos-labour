@@ -8,6 +8,7 @@ module.exports = function(app) {
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("This is req.user\n\n"+req.user+"\n\n");
+    req.session.user = req.user;
     res.json(req.user);
   });
 
@@ -91,4 +92,24 @@ module.exports = function(app) {
       });
     }
   });
+
+  app.post("/api/job/apply", (req,res) => {
+    console.log("***********************", req.session.user.id)
+    db.Applied.create({
+        JobId: req.body.JobId,
+        UserId: req.session.user.id
+    })
+    .then(function() {
+        console.log("sucesss")
+    //   console.log(req.body.user_type)
+        res.json({success:true});
+        
+    })
+    .catch(function(err) {
+        console.log("fail")
+        console.log(err)
+    });
+  });
+
 };
+
