@@ -4,47 +4,53 @@
 
 
   <div class="row">
-    <div class="col-2">
-            <%- include('partials/sidebar') %>
+    <div class="col-sm-2" id="sidebarCol">
+            <%- include('partials/sidebar' , {highlightDashboard: 'highlight', highlightViewJob: '', highlightPostJob:''}) %>
     </div>
-    <div class="col-10">
-      <div><button> Find Labourers</button></div>
+    <main class="col-sm-10" id="mainCol">
+      <h3>Welcome: <%= companyName %></h3>
+      <br>
+      <div><button class="postJobBtn"> Post New Job</button></div>
+      <br>
       <h3>Job Posted</h3>
-      <div class="postedJobs">
+      <div class="row postedJobs">
         <%_ for (let job of jobs){ _%>
-          <%_ if(job.dataValues.job_status == 'open'){ _%>
-            <div class="card jobCard" data-jobID="<%= job.dataValues.id %>">
-              <div class="card-header">
-                <%= job.dataValues.address %>
-              </div>
-              <div class="card-body">
-                <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
-                <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
-                <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
-                <p class="card-text">Number of Applicants: <%= job.dataValues.Applieds.length %> </p>
-              </div>
-            </div>    
+          <%_ if(job.job_status == 'open'){ _%>
+            <div class="col-sm-6">
+              <div class="card jobCard" data-jobid="<%= job.id %>">
+                <div class="card-header">
+                  <%= job.address %>
+                </div>
+                <div class="card-body dashboard-cardBody">
+                  <p class="card-text" title="start date"><i class="far fa-calendar-check startDate"></i>: <%= job.start_date %> </p>
+                  <p class="card-text" title="end date"><i class="far fa-calendar-times endDate"></i>: <%= job.end_date %> </p>
+                  <!-- <p class="card-text" title="site manager"><i class="far fa-id-badge"></i>: <%# job.site_manager %> </p> -->
+                  <!-- <p class="card-text">Number of Applicants: <%# job.Applieds.length %> </p> -->
+                </div>
+              </div>    
+            </div>
           <%_ } else { _%>
-            <div class="card jobCard closedStatus" data-jobID="<%= job.dataValues.id %>">
-              <div class="card-header closedStatus">
-                <%= job.dataValues.address %>
-              </div>
-              <div class="card-body">
-                <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
-                <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
-                <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
-                <p class="card-text">Number of Applicants: <%= job.dataValues.Applieds.length %> </p>
-              </div>
-            </div>    
+            <div class="col-sm-6">
+              <div class="card jobCard closedStatus" data-jobid="<%= job.id %>">
+                <div class="card-header closedStatus">
+                  <%= job.address %>
+                </div>
+                <div class="card-body dashboard-cardBody">
+                  <p class="card-text" title="start date"><i class="far fa-calendar-check startDate"></i>: <%= job.start_date %> </p>
+                  <p class="card-text" title="end date"><i class="far fa-calendar-times endDate"></i>: <%= job.end_date %> </p>
+                  <!-- <p class="card-text" title="site manager"><i class="far fa-id-badge siteManager"></i>: <%# job.site_manager %> </p> -->
+                  <!-- <p class="card-text">Number of Applicants: <%# job.Applieds.length %> </p> -->
+                </div>
+              </div>    
+            </div>
           <%_ } _%>
         <%_ } _%>
                 
       </div>
-    </div>
+    </main>
   </div>
 
-
-
-
-
 <%- include('partials/footer') %>
+<script src='/js/employer.js'></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ module.exports = function(app) {
   app.get("/", isAuthenticated, function(req, res) {
     db.User.findOne({where: {id: req.user.id}})
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       if (data.dataValues.user_type == 'company'){
         res.redirect('/employers/dashboard');
       }else{

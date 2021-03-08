@@ -1,0 +1,67 @@
+<%- include('partials/head',{title:'labourer'}) %>
+
+<%- include('partials/navbar') %>
+
+
+  <div class="row">
+    <div class="col-2">
+            <%- include('partials/sidebar-labourer') %>
+    </div>
+    <div class="col-10">
+      <div><button id="backToDashboardBtn"> Back to Dashboard</button></div>
+      <h3>All Applied Job</h3>
+      <div class="appliedJobs table-responsive">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Job Address</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% let hash = 1 %>
+              <%_ for (let job of applied){ _%>
+                  <%_ if (job.dataValues.chosen === true){ _%>
+                      <tr class ="labourerSelected">
+                  <%_ } else if (job.dataValues.chosen === null) { _%>
+                      <tr class ="labourerOpen"> 
+                  <%_ } else { _%>
+                      <tr class ="labourerLost">
+                  <%_ } _%>
+                      <th scope="row"><%= hash %></th>
+                      <td><%= job.dataValues.Job.address %></td>
+                      <td><%= job.dataValues.Job.start_date %></td>
+                      <td><%= job.dataValues.Job.end_date %></td>
+                      <%_ if (job.dataValues.chosen === true){ _%>
+                          <td>Selected</td>
+                          <td></td>
+                      <%_ } else if (job.dataValues.chosen === null) { _%>
+                          <td>Open</td>
+                          <td><button class="resignBtn" data-jobAddress="<%= job.dataValues.Job.address%>">Resign</button></td>  
+                      <%_ } else { _%>
+                          <td>Lost</td>
+                          <td></td>
+                      <%_ } _%>
+                  </tr>
+                  <% hash++ %>
+              <%_ } _%>
+          </tbody>
+        </table>
+        
+                
+      </div>
+    </div>
+  </div>
+
+
+    <footer>
+
+    </footer>
+
+    <script src="/js/labourer.js"></script>
+</body>
+</html>
