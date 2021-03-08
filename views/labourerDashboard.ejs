@@ -1,0 +1,42 @@
+<%- include('partials/head',{title:'labourer'}) %>
+
+<%- include('partials/navbar') %>
+
+
+  <div class="row">
+    <div class="col-2">
+            <%- include('partials/sidebar-labourer') %>
+    </div>
+    <div class="col-10">
+      <h2>Welcome: <%= labourerName %></h2>
+      <br>
+      <div><button> Find Job</button></div>
+      <br>
+      <h3>Upcoming Job</h3>
+      <div class="appliedJobs">
+        <%_ for (let job of applied){ _%>
+            <div class="card jobCard labourerSelected" data-jobID="<%= job.dataValues.id %>">
+              <div class="card-header">
+                <%= job.dataValues.Job.address %>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Start Date: <%= job.dataValues.Job.start_date %> </p>
+                <p class="card-text">End Date: <%= job.dataValues.Job.end_date %> </p>
+                <p class="card-text">Site Manager: <%= job.dataValues.Job.site_manager %> </p>
+                <p class="card-text">Status: Chosen </p>
+              </div>
+            </div> 
+        <%_ } _%>
+                
+      </div>
+    </div>
+  </div>
+
+
+    <footer>
+
+    </footer>
+
+    <script src="/js/labourer.js"></script>
+</body>
+</html>

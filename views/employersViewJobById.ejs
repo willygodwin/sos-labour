@@ -4,16 +4,16 @@
 
 
   <div class="row">
-    <div class="col-2">
-        <%- include('partials/sidebar') %>
+    <div class="col-2" id="sidebarCol">
+        <%- include('partials/sidebar' , {highlightDashboard: '', highlightViewJob: 'highlight', highlightPostJob:''}) %>
     </div>
-    <div class="col-10">
+    <main class="col-10" id="mainCol">
         <div><button id="backToDashboard">Back to Dashboard</button></div>
         <br>
         <%_ if(job.job_status == 'open'){ _%>
-            <div class="card">
+            <div class="card viewjob-card">
                 <div class="card-header" data-jobid="<%= job.id %>">
-                  Job ID: <%= job.id %>
+                  Posted Job
                 </div>
                 <div class="card-body">
                     <form>
@@ -75,9 +75,9 @@
                 </div>
             <% } %>
         <%_ } else { _%>
-            <div class="card closedStatus">
+            <div class="card closedStatus viewjob-card">
                 <div class="card-header" data-jobid="<%= job.id %>">
-                  Job ID: <%= job.id %>
+                  Posted Job
                 </div>
                 <div class="card-body">
                     <form>
@@ -165,7 +165,7 @@
                 <%_ } _%>
             <%_ } _%>
         <%_ } _%>
-    </div>
+    </main>
   </div>
 
 

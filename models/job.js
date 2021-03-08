@@ -1,15 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
     const Job = sequelize.define("Job", {
-        id:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         address:{
             type: DataTypes.STRING(80),
             allowNull: false,
-            unique: true,
+            // unique: true,
         },
         site_manager: {
             type: DataTypes.STRING(35),

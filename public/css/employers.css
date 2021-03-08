@@ -1,6 +1,75 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    max-height: 100vh;
+    max-width: 100vw;
+}
+.row{
+    /* max-width: 100vw;
+    height: 53vw ; */
+    margin: 0;
+}
+
+
+#dropdownMenu1::after{
+    color: rgb(235, 235, 235);
+    vertical-align: 0.5rem;
+}
+#userIcon{
+    font-size: 2rem;
+    color: rgb(235, 235, 235);
+}
+.dropdown-menu{
+    padding: 0;
+}
+.dropdown-item{
+    font-size: 0.8rem;
+}
+.dropdown-divider{
+    margin: 0;
+}
+
+#sidebarCol{
+    box-sizing: border-box;
+    padding: 1.5rem 0.5rem;
+    border-right: 1px solid grey;
+}
+
+#mainCol{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1.5rem;
+}
+
+.sidebarText{
+    padding: 0.2rem 0.5rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.sidebarText:hover{
+    background-color:rgba(173, 173, 173, 0.5);
+    border-radius: 0.5rem;
+}
+
+.highlight{
+    background-color: rgba(18, 124, 18, 0.5);
+    border-radius: 0.5rem;
+}
+
+.highlight:hover{
+    background-color:rgba(18, 124, 18, 0.5);
+    border-radius: 0.5rem;
+}
 .postedJobs{
-    height: 70vh;
-    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
 }
 .jobCard {
     cursor: pointer;
@@ -12,14 +81,39 @@
     border: 1px solid black;
 }
 
+div.dashboard-cardBody{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 0.2rem;
+}
 p.card-text{
     margin: 0;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.8rem;
+    color: rgb(71, 71, 71);
+    display: flex;
+    align-items: center;
+}
+.startDate{
+    color: green;
+    font-size: 1rem;
+}
+.endDate{
+    color:red;
+    font-size: 1rem;
+}
+.siteManager{
+    font-size: 1rem;
 }
 
 .closedStatus {
     background-color: rgba(253, 90, 90, 0.5);
 }
 
+.viewjob-card{
+    width: 75%;
+}
 .selectedUser{
     background-image: linear-gradient(to top, rgba(0,255,42,0.1), rgba(0,255,42,0.5));
     border: 2px solid black;

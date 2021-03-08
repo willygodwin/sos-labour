@@ -1,0 +1,7 @@
+.labourerSelected {
+    background-image: linear-gradient(to top, rgba(0,255,42,0.1), rgba(0,255,42,0.5));
+}
+
+.labourerLost {
+    background-image: linear-gradient(to top, rgba(252, 62, 62, 0.1), rgba(253, 62, 62, 0.5));
+}
