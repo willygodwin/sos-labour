@@ -1,4 +1,4 @@
-<%- include('partials/head',{title:'employers'}) %>
+<%- include('partials/head',{title:'jobsearch'}) %>
 
 <%- include('partials/navbar') %>
 
@@ -17,24 +17,16 @@
               <div class="card-header">
                 <%= job.dataValues.address %>
               </div>
-              <div class="card-body">
-                <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
-                <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
-                <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
-                <p class="card-text">Number of Applicants: <%= job.dataValues.number_of_labourers %> </p>
-                <button class="btn btn-apply" data-jobID="<%= job.dataValues.id %>" >Apply</button>
-              </div>
-            </div>    
-          <%_ } else { _%>
-            <div class="card jobCard closedStatus" data-jobID="<%= job.dataValues.id %>">
-              <div class="card-header closedStatus">
-                <%= job.dataValues.address %>
-              </div>
-              <div class="card-body">
-                <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
-                <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
-                <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
-                <p class="card-text">Number of Applicants: <%= job.dataValues.number_of_labourers %> </p>
+                <div class="card-body card-body-jobsearch">
+                  <div class="job-info-div">
+                    <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
+                    <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
+                    <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
+                    <p class="card-text">Number of Applicants: <%= job.dataValues.number_of_labourers %> </p>
+                  </div>
+                  <div class="apply-button-div">
+                    <button class="btn btn-apply" data-jobID="<%= job.dataValues.id %>" >Apply</button>
+                  </div>
               </div>
             </div>    
           <%_ } _%>

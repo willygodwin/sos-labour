@@ -7,17 +7,25 @@ if (window.location.pathname === '/labourers/jobsearch'){
         apply.addEventListener('click',(e) => {
             e.preventDefault();
             console.log(e.currentTarget);
+            const jobDivApply = e.currentTarget.parentNode.parentNode
+            console.log(jobDivApply)
             const jobId = e.currentTarget.getAttribute('data-jobID');
             console.log(jobId);
+            
 
             applyJob(jobId)
             .then((response) => {
                 // Check that the response is all good
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
+                    jobDivApply.style.backgroundColor = "green"
+                   
+
 
                     //change the css of that card to make it green
+                   
                     //add a delete request if the job wants to un apply
+
                     
                     console.log("successs")// if all good have to send the user to their dashboard
     

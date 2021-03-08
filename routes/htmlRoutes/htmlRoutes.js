@@ -71,7 +71,7 @@ router.get('/labourers/dashboard', (req,res) => {
     .catch((err) => console.log(err));
 });
 
-router.get('/labourers/jobsearch', (req,res) => {
+router.get('/labourers/jobsearch', isAuthenticated, (req,res) => {
     db.Job.findAll({where: {job_status: "open"}})
     .then((data) => {
         console.log(data);
