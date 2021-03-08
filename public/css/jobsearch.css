@@ -1,7 +1,19 @@
 
+.navbar{
+    background-color: #81d4fa;
+}
+
+body {
+	font-family: "Avenir Next", sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+
 .btn-apply {
     border: 1px solid black;
     cursor: pointer;
+    /* background-color: #40c4ff; */
 }
 
 .card-body-jobsearch {
@@ -14,6 +26,12 @@
     overflow-y: auto;
 }
 .jobCard {
-    cursor: pointer;
+    /* cursor: pointer; */
     margin: 1rem;
 }
+
+.jobCard .card-header {
+    background-color: #b3e5fc;
+    
+}
+
