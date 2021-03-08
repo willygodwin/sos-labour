@@ -1,0 +1,19 @@
+
+.btn-apply {
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.card-body-jobsearch {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.postedJobs{
+    height: 70vh;
+    overflow-y: auto;
+}
+.jobCard {
+    cursor: pointer;
+    margin: 1rem;
+}

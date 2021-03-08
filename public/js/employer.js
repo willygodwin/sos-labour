@@ -225,10 +225,10 @@ const handleSubmitNewJobBtn = () => {
     })
 }
 
-
 handleDashboardSidebar();
 handleViewPostedJobSidebar();
 handlePostJobSidebar();
+
 // JS to run when rendering HTML /employers/dashboard
 if (window.location.pathname === '/employers/dashboard'){
     handlePostedJobCards(); 

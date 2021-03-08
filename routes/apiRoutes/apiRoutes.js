@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const { Op } = require('sequelize');
+var passport = require("../../config/passport");
 
 
 router.post('/api/postnewjob', (req,res) => {
@@ -100,6 +101,9 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
     .then(() => res.json({success:true}))
     .catch((err) => console.log(err))
 })
+
+
+
 
 
 module.exports = router

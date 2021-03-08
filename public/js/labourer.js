@@ -38,6 +38,7 @@ const handleResignBtn = () => {
     })
 };
 
+
 if (window.location.pathname === '/labourers/dashboard'){
     handleViewAppliedJob();
 }    

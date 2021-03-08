@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const isAuthenticated = require(path.join(__dirname,'..','..','config','middleware','isAuthenticated'));
+const { Op } = require("sequelize");
 
 // html route to display employer/company dashboard after they log-in
 router.get('/employers/dashboard', isAuthenticated, (req,res) => {
@@ -126,4 +127,28 @@ router.get('/labourers/viewappliedjob', isAuthenticated, (req,res) => {
     }
     
 })
+
+router.get('/labourers/jobsearch', isAuthenticated, (req,res) => {
+    db.Applied.findAll({
+        where:{UserId: req.user.id}
+    })
+    .then((data) => {
+        // console.log(data);
+        const jobApplied = data.map(applied => {
+            return applied.JobId
+        });
+        return db.Job.findAll({
+            where:{
+                id: {[Op.notIn]: jobApplied },
+                job_status: 'open'
+            }
+        })
+    })
+    .then((data2) => res.render('jobSearch',{jobs: data2}))
+    .catch((err) => console.log(err));
+
+})
+
+
+
 module.exports = router
