@@ -1,0 +1,44 @@
+.jiffy-logo {
+    height: 5rem;
+    width: 10rem;
+    /* image-rendering: auto;
+    image-rendering: crisp-edges; */
+    image-rendering: pixelated;
+;
+}
+
+.navbar{
+    /* background-color: #81d4fa; */
+    padding: 0px;
+}
+
+.back-ground-image {
+    background-image: url(../images/background-image.jpg);
+    background-size: cover;
+    background-position: center top;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.back-ground-image-cover{
+    
+        background-color: rgba(128, 128, 128, 0.301);
+        background-size: cover;
+        background-position: center top;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+
+}
+.cvzuiO {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    width: auto;
+    text-align: center;
+    margin: 0px auto;
+    transform: translateY(-40%);
+    padding: 0px 32px;
+}
