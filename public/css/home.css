@@ -1,44 +1,211 @@
+body { 
+    margin: 0;
+    background-color: #fff;
+ }
+
 .jiffy-logo {
-    height: 5rem;
-    width: 10rem;
-    /* image-rendering: auto;
-    image-rendering: crisp-edges; */
-    image-rendering: pixelated;
+    height: 3rem;
+    width: 6rem;
+    /* /* image-rendering: auto; */
+    image-rendering: crisp-edges;
+    /* image-rendering: pixelated; */
 ;
 }
 
 .navbar{
     /* background-color: #81d4fa; */
     padding: 0px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    background: rgba(255,255,255,0);
+    transition: all 2s;
+    
 }
+
+.navbar.scrolling{
+    background-color: #FFFFFF;
+    color:rgba(44, 44, 44, 0.733);
+    /* transform: translateY(-40%); */
+    transition: all 2s;
+    
+    
+}
+
+.headers-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+}
+
+.user-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 20%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.navbar a{
+    color:inherit;
+    
+}
+
+.navbar a:hover{
+    color: rgba(41, 43, 50, 0.548);
+    
+}
+
+
+/* scroll position 0 javascript for landing page */
 
 .back-ground-image {
     background-image: url(../images/background-image.jpg);
     background-size: cover;
     background-position: center top;
+    background-attachment: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 0;
+    /* background-size: 100% 100%; */
+    background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
+
+
+.back-ground-image-container{
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 350px;
+    min-height: 350px;
+    overflow-x: hidden;
+}
 .back-ground-image-cover{
     
-        background-color: rgba(128, 128, 128, 0.301);
+        background-color:  rgba(41, 43, 50, 0.774);
+        /* background-color: rgba(128, 128, 128, 0.301); */
         background-size: cover;
         background-position: center top;
         width: 100%;
         height: 100%;
         z-index: 1;
+        overflow-x: hidden;
 
 }
-.cvzuiO {
+.text-container {
     position: absolute;
     top: 50%;
     left: 0px;
     right: 0px;
-    width: auto;
-    text-align: center;
+    width: 50%;
+    /* text-align: center; */
     margin: 0px auto;
     transform: translateY(-40%);
     padding: 0px 32px;
+}
+
+.text-container h1{
+    color: #FFFFFF;
+    text-align: initial;
+}
+
+.text-container p{
+    color: #FFFFFF;
+    font-size: 34px;
+    text-align: initial;
+}
+
+.text-container.get-started-button {
+    text-align: initial;
+}
+
+
+button.get-started {
+    display:inline-block;
+    
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color: rgba(255, 255, 240, 0);
+    /* text-align:center; */
+    text-align: initial;
+    transition: all 0.2s;
+}
+
+button.get-started:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
+
+footer{
+    /* padding: 64px 0 0; */
+    /* text-align: center; */
+    background-color: #F7F7F7 !important;
+    border-top: 1px solid #DDDDDD !important;
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-div{
+    /* width: 50%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-div a{
+    color: black;
+    
+}
+
+.footer-allrights {
+    
+    text-align: center;
+}
+hr {
+    width: 17rem;
+    margin: none;
+}
+
+@media all and (max-width:30em){
+    a.button1{
+        display:block;
+        margin:0.4em auto;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    .back-ground-image-container {
+        height: calc(100vh - 200px);
+        max-height: 616px;
+        min-height: unset;
+        background: rgb(41, 43, 50);
+        overflow-x: hidden;
+    }
 }
