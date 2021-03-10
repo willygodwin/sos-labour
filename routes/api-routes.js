@@ -94,31 +94,56 @@ module.exports = function(app) {
     }
   });
 
-  app.post("/api/job/apply", (req,res) => {
+  app.post("/api/job/apply",  (req,res) => {
     console.log("***********************", req.session.user.id)
     db.Applied.create({
         JobId: req.body.JobId,
         UserId: req.session.user.id
     })
-    .then(function() {
-        console.log("sucesss")
-    //   console.log(req.body.user_type)
-        // res.json({success:true});
-        const mailObj = {
-          from: "willygodwin47@gmail.com",
-          to: req.session.user.email,
-          subject: "New Job Application", // subject line 
-          text: "You have a just applied for a new job "
-
-        }
-
-        sendMail(mailObj);
+    .then(() => {
+        return db.Job.findOne({where: {id: req.body.JobId}})
     })
-    .catch(function(err) {
-        console.log("fail")
-        console.log(err)
-    });
-  });
-
+    .then((data) =>{
+        return db.Company.findOne({where: {id: data.dataValues.CompanyId}})
+    })
+    .then((data) =>{
+        return db.User.findOne({where: {id: data.dataValues.UserId}}) 
+    })
+    .then(async (data) =>{
+      const companyEmail = data.dataValues.email
+      console.log("sucesss")
+      console.log(companyEmail)
+      //     //Sending a mail to the labourer informing them they have applied for a job. 
+          const mailObj = {
+            from: "willygodwin47@gmail.com",
+            // to: req.session.user.email,
+            to: companyEmail,
+            subject: "New Job Application", // subject line 
+            text: "You have a just applied for a new job "
+  
+          }
+          try { 
+            const result = await sendMail(mailObj); 
+            // send the response 
+            res.json({ 
+              status:true, 
+              payload:result 
+            }); 
+  
+            
+          } catch (error) { 
+            console.error(error.message); 
+            res.json({ 
+              status:false, 
+              payload:"Something went wrong in Sendmail Route." 
+            }) 
+          } 
+            
+      })
+      .catch(function(err) {
+          console.log("fail")
+          console.log(err)
+      });
+    })  
 };
 

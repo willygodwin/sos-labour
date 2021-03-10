@@ -4,6 +4,7 @@ const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const { Op } = require('sequelize');
 var passport = require("../../config/passport");
+const sendMail = require("../../config/send-mail"); 
 
 
 router.post('/api/postnewjob', (req,res) => {
@@ -84,9 +85,28 @@ router.put('/api/applicantschosenfor/:jobid', (req,res) => {
         })
         .then(() => { 
             let chosenUserId = chosenApplicants.map(user => user.UserId);
-            return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+            return db.User.findAll({where: {id: chosenUserId}})
+            // return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
         })
-        .then(() => res.json({success:true}))
+        // .then(() => {
+        //     return db.User.findAll({where: {id: chosenUserId}})
+        // }) 
+        .then((data) => {
+            console.log(data)
+            data.forEach(element => {
+                mailChosenApplicants(res, element)
+                
+            });  
+        }) 
+        .then(()=> {
+            let chosenUserId = chosenApplicants.map(user => user.UserId);
+            return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+        }) 
+        .then(()=> {
+            res.json({success:true})
+        })
+        
+        
         .catch((err) => console.log(err))
     }else{
         res.redirect(`/employers/viewjob/${req.params.jobid}`)
@@ -102,6 +122,37 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
     .catch((err) => console.log(err))
 })
 
+const mailChosenApplicants = async (res, data) =>{
+    const companyEmail = data.dataValues.email
+    console.log("sucesss")
+    console.log(companyEmail)
+    //     //Sending a mail to the labourer informing them they have applied for a job. 
+        const mailObj = {
+          from: "willygodwin47@gmail.com",
+          // to: req.session.user.email,
+          to: "janegodwin37@gmail.com",
+          subject: "New Job Application", // subject line 
+          text: "Congratulations you have just been chosen for a job!"
+
+        }
+        try { 
+          const result = await sendMail(mailObj); 
+          // send the response 
+        //   res.json({ 
+        //     status:true, 
+        //     payload:result 
+        //   }); 
+
+          
+        } catch (error) { 
+          console.error(error.message); 
+        //   res.json({ 
+        //     status:false, 
+        //     payload:"Something went wrong in Sendmail Route." 
+        //   }) 
+        } 
+          
+    }
 
 
 

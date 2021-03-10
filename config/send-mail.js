@@ -10,7 +10,9 @@ const sendEmail = async (mailObj) => {
     try { 
         // Create a transporter 
         let transporter = nodemailer.createTransport({ 
-        service: 'gmail',
+        // service: 'gmail',
+        host: "smtp-relay.sendinblue.com",
+        port: 587,
         auth: { 
             user:process.env.GMAIL_USER, 
             pass:process.env.GMAIL_PASS, 
