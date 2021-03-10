@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+const sendMail = require("../config/send-mail"); 
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -102,8 +103,16 @@ module.exports = function(app) {
     .then(function() {
         console.log("sucesss")
     //   console.log(req.body.user_type)
-        res.json({success:true});
-        
+        // res.json({success:true});
+        const mailObj = {
+          from: "willygodwin47@gmail.com",
+          to: req.session.user.email,
+          subject: "New Job Application", // subject line 
+          text: "You have a just applied for a new job "
+
+        }
+
+        sendMail(mailObj);
     })
     .catch(function(err) {
         console.log("fail")
