@@ -3,11 +3,11 @@
 <%- include('partials/navbar') %>
 
 
-  <div class="row">
-    <div class="col-2">
-            <%- include('partials/sidebar-labourer') %>
+  <div class="row" >
+    <div class="col-2" id="sidebarCol">
+            <%- include('partials/sidebar-labourer',{highlightDashboard: '', highlightAppliedJob: 'highlight', highlightSearchJob:'', name: `${name}` }) %>
     </div>
-    <div class="col-10">
+    <div class="col-10" id="mainCol">
       <div><button id="backToDashboardBtn"> Back to Dashboard</button></div>
       <h3>All Applied Job</h3>
       <div class="appliedJobs table-responsive">

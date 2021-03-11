@@ -1,13 +1,13 @@
-<%- include('partials/head',{title:'jobsearch'}) %>
+<%- include('partials/head',{title:'labourer'}) %>
 
 <%- include('partials/navbar') %>
 
 
   <div class="row">
-    <div class="col-2">
-            <%- include('partials/sidebar-labourer') %>
+    <div class="col-2" id="sidebarCol">
+            <%- include('partials/sidebar-labourer',{highlightDashboard: '', highlightAppliedJob: '', highlightSearchJob:'highlight', name: `${name}` }) %>
     </div>
-    <div class="col-10">
+    <div class="col-10" id="mainCol">
       <!-- <div><button> Find Labourers</button></div> -->
       <h3>Job's Available</h3>
       <div class="postedJobs">
@@ -37,6 +37,7 @@
   </div>
 
   <script src="/js/jobsearch.js"></script>
+  <script src="/js/labourer.js"></script>
 
 
 

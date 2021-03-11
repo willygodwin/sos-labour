@@ -1,7 +1,27 @@
 module.exports = function(sequelize, DataTypes) {
     const Job = sequelize.define("Job", {
         address:{
-            type: DataTypes.STRING(80),
+            type: DataTypes.STRING(40),
+            allowNull: false,
+            // unique: true,
+        },
+        suburb:{
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            // unique: true,
+        },
+        city:{
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            // unique: true,
+        },
+        state:{
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            // unique: true,
+        },
+        postcode:{
+            type: DataTypes.STRING(8),
             allowNull: false,
             // unique: true,
         },

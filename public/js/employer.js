@@ -1,5 +1,5 @@
-const handlePostedJobCards = () => {
-    const jobCards = document.querySelectorAll('.jobCard');
+const handleViewJobBtn = () => {
+    const jobCards = document.querySelectorAll('.view-job-btn');
     jobCards.forEach((job) => {
         job.addEventListener('click',(e) => {
             e.preventDefault();
@@ -9,6 +9,21 @@ const handlePostedJobCards = () => {
             location.href = `${origin}/employers/viewjob/${jobId}`
         })
     });
+}
+
+const handleMapIcon =() => {
+    const map = document.querySelectorAll('.map-icon')
+    map.forEach((icon) => {
+        icon.addEventListener('click', (e) =>{
+            e.preventDefault();
+            const address = e.currentTarget.getAttribute('data-jobAddress').toLowerCase().replace(/[\s,-/.]+/g, '+')
+            console.log(address);
+            window.open(
+                `https://www.google.com/maps/place/${address}`,
+                '_blank'
+            );
+        })
+    })
 }
 
 const updateJob = (job) => 
@@ -37,14 +52,14 @@ const applicantschosen = (users,jobId) =>
         body: JSON.stringify(users)
     });
     
-const handleBackBtn = () => {
-    const backBtn = document.querySelector('#backToDashboard');
-    backBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const origin = window.location.origin;
-        location.href = `${origin}/employers/dashboard`;
-    });
-}
+// const handleBackBtn = () => {
+//     const backBtn = document.querySelector('#backToDashboard');
+//     backBtn.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         const origin = window.location.origin;
+//         location.href = `${origin}/employers/dashboard`;
+//     });
+// }
 
 const handleEditBtn = () => {
     const editBtn = document.querySelector('#editJob');
@@ -59,12 +74,16 @@ const handleEditBtn = () => {
             updateBtn.addEventListener('click',(e) => {
                 e.preventDefault();
                 const job = {
-                    id: document.querySelector('.card-header').getAttribute('data-jobid'),
-                    address:document.querySelector('#jobAddress').value,
-                    site_manager: document.querySelector('#siteManager').value,
-                    start_date:document.querySelector('#startDate').value.split("-").reverse().join("-"),
-                    end_date:document.querySelector('#endDate').value.split("-").reverse().join("-"),
-                    number_of_labourers: document.querySelector('#numberLabourers').value,
+                    id: e.currentTarget.getAttribute('data-jobid'),
+                    address:document.querySelector('#job-address').value,
+                    suburb: document.querySelector('#job-suburb').value,
+                    city:document.querySelector('#job-city').value,
+                    state:document.querySelector('#job-state').value,
+                    postcode:document.querySelector('#job-postcode').value,
+                    site_manager: document.querySelector('#site-manager').value,
+                    start_date:document.querySelector('#start-date').value,
+                    end_date:document.querySelector('#end-date').value,
+                    number_of_labourers: document.querySelector('#labour-quantity').value,
                 }
                 updateJob(job)
                 .then(() => {
@@ -82,7 +101,7 @@ const handleDeleteBtn = () => {
     if(deleteBtn !== null){
         deleteBtn.addEventListener('click',(e) => {
             e.preventDefault();
-            const jobId = document.querySelector('.card-header').getAttribute('data-jobid');
+            const jobId = e.currentTarget.getAttribute('data-jobid');
             const confirmDelete = confirm(`Do you want to delete Job ID: ${jobId}?`)
             if (confirmDelete){
                 const job = {id: jobId}
@@ -101,10 +120,10 @@ const selectBtnEvent = (e) => {
     e.preventDefault();
     const buttonText = e.currentTarget.textContent;
     if(buttonText === 'Select'){
-        let numberOfLabourers = document.querySelector('#numberLabourers').getAttribute('data-numberOfLabourers');
+        let numberOfLabourers = document.querySelector('#labour-quantity').getAttribute('data-numberOfLabourers');
         if (chosenApplicants.length < numberOfLabourers){
             let user = {
-                JobId: document.querySelector('.card-header').getAttribute('data-jobid'),
+                JobId: document.querySelector('#editJob').getAttribute('data-jobid'),
                 UserId: e.currentTarget.getAttribute('data-userid'),
             }
             chosenApplicants.push(user);
@@ -138,10 +157,10 @@ const handleChoseApplicantsBtn = () => {
     if(choseApplicantsBtn !== null){
         choseApplicantsBtn.addEventListener('click',(e) => {
             e.preventDefault();
-            let numberOfLabourers = document.querySelector('#numberLabourers').getAttribute('data-numberOfLabourers');
+            let numberOfLabourers = document.querySelector('#labour-quantity').getAttribute('data-numberOfLabourers');
             if (chosenApplicants.length == numberOfLabourers ){
                 console.log(`you have chosen ${chosenApplicants.length} people`);
-                let jobId = document.querySelector('.card-header').getAttribute('data-jobid');
+                let jobId = document.querySelector('#editJob').getAttribute('data-jobid');
                 applicantschosen(chosenApplicants,jobId)
                 .then(() => {
                     const origin = window.location.origin;
@@ -185,15 +204,15 @@ const handlePostJobSidebar = () => {
 }
 
 
-const handlePostNewJobBtn = () => {
-    const postJobBtn = document.querySelector('.postJobBtn');
-    postJobBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const origin = window.location.origin;
-        location.href = `${origin}/employers/postnewjob`
+// const handlePostNewJobBtn = () => {
+//     const postJobBtn = document.querySelector('.postJobBtn');
+//     postJobBtn.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         const origin = window.location.origin;
+//         location.href = `${origin}/employers/postnewjob`
 
-    })
-}
+//     })
+// }
 
 const postJob = (job) => 
     fetch(`/api/postnewjob`,{
@@ -211,9 +230,13 @@ const handleSubmitNewJobBtn = () => {
         e.preventDefault();
         const newJobData = {
             address:document.querySelector('#job-address').value,
+            suburb: document.querySelector('#job-suburb').value,
+            city:document.querySelector('#job-city').value,
+            state:document.querySelector('#job-state').value,
+            postcode:document.querySelector('#job-postcode').value,
             site_manager: document.querySelector('#site-manager').value,
-            start_date:document.querySelector('#start-date').value.split("-").reverse().join("-"),
-            end_date:document.querySelector('#end-date').value.split("-").reverse().join("-"),
+            start_date:document.querySelector('#start-date').value,
+            end_date:document.querySelector('#end-date').value,
             number_of_labourers: document.querySelector('#labour-quantity').value,
         }
         postJob(newJobData)
@@ -231,14 +254,16 @@ handlePostJobSidebar();
 
 // JS to run when rendering HTML /employers/dashboard
 if (window.location.pathname === '/employers/dashboard'){
-    handlePostedJobCards(); 
-    handlePostNewJobBtn();
+    handleViewJobBtn(); 
+    // handlePostNewJobBtn();
+    handleMapIcon();
 } else if (window.location.pathname === '/employers/postnewjob'){
     handleSubmitNewJobBtn();
 } else if(window.location.pathname === '/employers/viewpostedjobs'){
-
+    handleMapIcon();
+    handleViewJobBtn(); 
 } else{
-    handleBackBtn();
+    // handleBackBtn();
     handleEditBtn();
     handleDeleteBtn();
     handleSelectUserBtn();

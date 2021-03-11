@@ -11,9 +11,13 @@ router.post('/api/postnewjob', (req,res) => {
     .then((data) => {
         console.log(data);
         const CompanyId = data.dataValues.id;
-        const {address,site_manager,start_date,end_date,number_of_labourers} = req.body;
+        const {address,suburb,city,state,postcode,site_manager,start_date,end_date,number_of_labourers} = req.body;
         return db.Job.create({
             address,
+            suburb,
+            city,
+            state,
+            postcode,
             site_manager,
             start_date,
             end_date,
@@ -32,9 +36,13 @@ router.post('/api/postnewjob', (req,res) => {
 router.put('/api/updatejob/:jobid', (req,res) => {
     // console.log(req.body);
     if (req.params.jobid === req.body.id){
-        const {id,address,site_manager,start_date,end_date,number_of_labourers} = req.body;
+        const {id,address,suburb,city,state,postcode,site_manager,start_date,end_date,number_of_labourers} = req.body;
         db.Job.update({
             address,
+            suburb,
+            city,
+            state,
+            postcode,
             site_manager,
             start_date,
             end_date,

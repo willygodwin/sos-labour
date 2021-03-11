@@ -38,12 +38,41 @@ const handleResignBtn = () => {
     })
 };
 
+const handleSearchJobsBtn = () => {
+    const searchJobsBtn = document.querySelector('#searchJobsBtn');
+    searchJobsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/labourers/jobsearch`;
+    })
+}
+
+const handleDashboardSidebar = () => {
+    const dashboard = document.querySelector('#dashboardText');
+    dashboard.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/labourers/dashboard`
+    })
+}
+
+const handleSearchJobSidebar = () => {
+    const searchJob = document.querySelector('#searchJobText');
+    searchJob.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/labourers/jobsearch`
+    })
+}
+
+handleDashboardSidebar();
+handleViewAppliedJob();
+handleSearchJobSidebar();
 
 if (window.location.pathname === '/labourers/dashboard'){
-    handleViewAppliedJob();
+    handleSearchJobsBtn();
 }    
 
 if (window.location.pathname === '/labourers/viewappliedjob'){
-    handleBackToDashboardBtn();
     handleResignBtn();
 }

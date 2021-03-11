@@ -6,7 +6,7 @@ INSERT INTO users (user_type,email,password) VALUES
 ('labourer','vincent@gmail.com','$2a$10$s1rwa7y3s0Yojnnb9dz4Fuwp1qTh.at..6TmJpIsAG.3K9r5Ywk6S'), -- password: vince
 ('labourer','will@gmail.com','$2a$10$B6B8bpbtEwGvdymEbQ7xdeKXw/FRTl9xs9thBss4rtAJi7idvJgaS'), -- password: will
 ('labourer','naresh@gmail.com','$2a$10$TFrvxvL3Vtbt4IRvianc4.pbbvMvj50u76RESOsKhhPAFrBDhbqmy'), -- password: naresh
-('labourer','ayshaa@gmail.com','$2a$10$Tevp.DcxsdAQ4MUN546EouY4lBDbIO2o2evt8UhTPq5sLV3XBOnPi'), -- password: aysha
+('labourer','ayshaa@gmail.com','$2a$10$Tevp.DcxsdAQ4MUN546EouY4lBDbIO2o2evt8UhTPq5sLV3XBOnPi'); -- password: aysha
 
 
 INSERT INTO companies (company_name,abn,UserId) VALUES
@@ -20,11 +20,11 @@ INSERT INTO labourers (first_name,last_name,dob,driver_license,whitecard,skills_
 ('naresh','rajmandu','02-02-1975','112233445','10003000','gypsum and plasterboard for 5 years',5),
 ('ayshaa','jacintha','03-03-1988','667788990','10004000','electrical and plumbing for 5 years',6);
 
-INSERT INTO jobs (address,site_manager,start_date,end_date,number_of_labourers,CompanyId) VALUES
-('27 macleod road, applecross,WA,6153','cameron smith','15-03-2021','16-03-2021',1,1),
-('29 macleod road, applecross,WA,6153','collin max','18-03-2021','25-03-2021',2,1),
-('81 ardross street, applecross,WA,6153','rory mcilroy','10-03-2021','11-03-2021',3,2),
-('99 ardross street, applecross,WA,6153','kevin na','10-03-2021','11-03-2021',4,2);
+INSERT INTO jobs (address,suburb,city,state,postcode,site_manager,start_date,end_date,number_of_labourers,CompanyId) VALUES
+('27 macleod road', 'applecross', 'perth','WA','6153','cameron smith','2021-03-15','2021-03-16',1,1),
+('29 macleod road', 'applecross','perth','WA','6153','collin max','2021-03-21','2021-03-25',2,1),
+('81 ardross street', 'applecross','perth','WA','6153','rory mcilroy','2021-03-10','2021-03-11',3,2),
+('99 ardross street', 'applecross','perth','WA','6153','kevin na','2021-04-10','2021-04-11',4,2);
 
 INSERT INTO applieds (JobId,UserId) VALUES
 (1,3),

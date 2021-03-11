@@ -7,35 +7,64 @@
     <div class="col-2" id="sidebarCol">
         <%- include('partials/sidebar' , {highlightDashboard: '', highlightViewJob: '', highlightPostJob:'highlight'}) %>
     </div>
-    <main class="col-10" id="mainCol">
-      <h3>Post New Job</h3>
+    <main class="col-10 post-new-job-col" id="mainCol">
+      <div class="post-new-job-card">
+        <div class="post-new-job-title">Post New Job</div>
+        
         <form class="postNewJob">
+          <div class="post-new-job-group">
             <div class="form-group">
-              <label for="job-address">Address *</label>
+              <label class="label-text"for="job-address">Address *</label>
               <input type="text"  name= "address" id="job-address" class="form-control">
             </div>
             <div class="form-group">
-              <label for="site-manager">Site Manager *</label>
-              <input type="text" class="form-control" id="site-manager" name="site_manager">
+              <label class="label-text"for="job-suburb">Suburb *</label>
+              <input type="text"  name= "suburb" id="job-suburb" class="form-control">
+            </div>
+          </div>
+          <div class="post-new-job-group">
+            <div class="form-group">
+              <label class="label-text"for="job-city">City *</label>
+              <input type="text"  name= "city" id="job-city" class="form-control">
             </div>
             <div class="form-group">
-              <label for="start-date">Start Date *</label>
+              <label class="label-text"for="job-state">State *</label>
+              <input type="text"  name= "state" id="job-state" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="label-text"for="job-postcode">Postcode *</label>
+              <input type="text"  name= "postcode" id="job-postcode" class="form-control">
+            </div>
+          </div>
+          <div class="post-new-job-group group2">
+            <div class="form-group">
+              <label class="label-text" for="start-date">Start Date *</label>
               <input type="date" class="form-control" id="start-date" name="start_date">
             </div>
             <div class="form-group">
-              <label for="end-date">End Date *</label>
+              <label class="label-text" for="end-date">End Date *</label>
               <input type="date" class="form-control" id="end-date" name="end_date">
             </div>
+          </div> 
+          <div class="post-new-job-group group2">
             <div class="form-group">
-              <label for="labour-quantity">Number of Labourer Required *</label>
+              <label class="label-text" for="site-manager">Site Manager *</label>
+              <input type="text" class="form-control" id="site-manager" name="site_manager">
+            </div>
+            <div class="form-group">
+              <label class="label-text" for="labour-quantity">Number of Labourer Required *</label>
               <input type="number" class="form-control" id="labour-quantity" name="number_of_labourers">
             </div>
+          </div>
+            
             <div style="display: none" id="alert" class="alert alert-danger" role="alert">
               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Error:</span> <span class="msg">  Please fill in all the compulsory fields</span>
             </div>
             <button type="" class="btn btn-primary mb-2" id="submitNewJobBtn">Submit New Job</button>
         </form>
+      </div>
+      
     </main>
   </div>
 

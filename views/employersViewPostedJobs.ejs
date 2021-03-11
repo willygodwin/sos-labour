@@ -1,0 +1,70 @@
+<%- include('partials/head',{title:'employers'}) %>
+
+<%- include('partials/navbar') %>
+
+
+<div class="row">
+    <div class="col-2" id="sidebarCol">
+        <%- include('partials/sidebar' , {highlightDashboard: '', highlightViewJob: 'highlight', highlightPostJob:''}) %>
+    </div>
+    <main class="col-10" id="mainCol">
+        <div class="view-posted-jobs-card">
+            <div class="view-posted-jobs-title">All Posted Jobs</div>
+            <div class="postedJobs table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class='table-header'>
+                          <th scope="col">#</th>
+                          <th scope="col">Job Address</th>
+                          <th scope="col">Start Date</th>
+                          <th scope="col">End Date</th>
+                          <th scope="col">Site Manager</th>
+                          <th scope="col">Labourers Required</th>
+                          <th scope="col">No of Applicants</th>
+                          <th scope='col'></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let hash = 1 %>
+                        <%_ for (let job of jobs){ _%>
+                            <%_ if (job.job_status == 'closed'){ _%>
+                                <tr >
+                                    <th scope="row" class ="job-status-closed"><%= hash %></th>
+                                    <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
+                                    <td><%= job.start_date.split("-").reverse().join("-") %></td>
+                                    <td><%= job.end_date.split("-").reverse().join("-") %></td>
+                                    <td><%= job.site_manager %></td>
+                                    <td><%= job.number_of_labourers %></td>
+                                    <td>Closed</td>
+                                    <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
+                                </tr>
+                            <%_ } else { _%>
+                                <tr >
+                                    <th scope="row" class ="job-status-open"><%= hash %></th>
+                                    <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
+                                    <td><%= job.start_date.split("-").reverse().join("-") %></td>
+                                    <td><%= job.end_date.split("-").reverse().join("-") %></td>
+                                    <td><%= job.site_manager %></td>
+                                    <td><%= job.number_of_labourers %></td>
+                                    <td><%= job.Applieds.length %></td>
+                                    <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
+                                </tr>
+                            <%_ } _%>
+                                    
+                            <% hash++ %>
+                        <%_ } _%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+    <footer>
+
+    </footer>
+
+    <script src="/js/employer.js"></script>
+</body>
+</html>
