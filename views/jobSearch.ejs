@@ -1,0 +1,44 @@
+<%- include('partials/head',{title:'labourer'}) %>
+
+<%- include('partials/navbar') %>
+
+
+  <div class="row">
+    <div class="col-2" id="sidebarCol">
+            <%- include('partials/sidebar-labourer',{highlightDashboard: '', highlightAppliedJob: '', highlightSearchJob:'highlight', name: `${name}` }) %>
+    </div>
+    <div class="col-10" id="mainCol">
+      <!-- <div><button> Find Labourers</button></div> -->
+      <h3>Job's Available</h3>
+      <div class="postedJobs">
+        <%_ for (let job of jobs){ _%>
+          <%_ if(job.dataValues.job_status == 'open'){ _%>
+            <div class="card jobCard" >
+              <div class="card-header">
+                <%= job.dataValues.address %>
+              </div>
+                <div class="card-body card-body-jobsearch">
+                  <div class="job-info-div">
+                    <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
+                    <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
+                    <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
+                    <p class="card-text">Number of Applicants: <%= job.dataValues.number_of_labourers %> </p>
+                  </div>
+                  <div class="apply-button-div">
+                    <button class="btn btn-apply" data-jobID="<%= job.dataValues.id %>" data-status="withdrawn" >Apply</button>
+                  </div>
+              </div>
+            </div>    
+          <%_ } _%>
+        <%_ } _%>
+                
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jobsearch.js"></script>
+  <script src="/js/labourer.js"></script>
+
+
+
+<%- include('partials/footer') %>

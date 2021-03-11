@@ -1,14 +1,14 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 document.addEventListener('DOMContentLoaded', (event) => {
     if (event) {
-      console.info('DOM loaded');
+    //   console.info('DOM loaded');
     }
     const loginForm = document.querySelector("form.login");
     const emailInput = document.querySelector("input#email-input");
     const passwordInput = document.querySelector("input#password-input");
 
     loginForm.addEventListener('click', (event) => {
-        console.log('test');
+        // console.log('test');
         event.preventDefault();
         const userData = {
             email: emailInput.value.trim(),

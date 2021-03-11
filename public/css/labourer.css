@@ -1,0 +1,131 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    max-height: 100vh;
+    max-width: 100vw;
+}
+.row{
+    /* max-width: 100vw;
+    height: 53vw ; */
+    margin: 0;
+}
+
+/* navbar css */
+#navbarRow{
+    height: 8vh;
+}
+#navbarCol2{
+    background-color: #007ee6;
+    display: flex;
+    align-items: center;
+}
+#navbarCol10{
+    box-shadow: 0 10px 5px -2px rgb(228, 228, 228);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index:1
+}
+#brandTitle{
+    color: white;
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 5px;
+}
+
+#dropdownMenu1::after{
+    color: rgb(228, 228, 228);
+    vertical-align: 0.5rem;
+}
+#userIcon{
+    font-size: 2rem;
+    color: rgb(228, 228, 228);
+}
+#userIcon:hover{
+    text-shadow: 0 0 1px black;
+}
+.dropdown-menu{
+    padding: 0;
+}
+.dropdown-item{
+    font-size: 0.8rem;
+}
+.dropdown-divider{
+    margin: 0;
+}
+/* navbar css */
+
+/* sidebar css */
+#sidebarCol{
+    box-sizing: border-box;
+    padding: 1.5rem 0.5rem;
+    box-shadow: 10px 0 5px -2px rgb(228, 228, 228);
+    z-index: 2;
+    text-align: center;
+    padding: 0;
+}
+#user-photo{
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin: 1.5rem;
+
+}
+#sidebar-hello{
+    font-weight: 500;
+    color: grey;
+}
+#sidebar-user-name{
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.sidebarText{
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color:grey;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+.sidebarText:hover{
+    background-color: rgb(231, 243, 255);
+    color:#007ee6;
+}
+
+.highlight{
+    background-color: rgb(231, 243, 255);
+    color:#007ee6;
+    font-weight: 600;
+    border-left: 3px solid rgb(184, 184, 184);
+}
+
+.highlight:hover{
+    background-color: rgb(231, 243, 255);
+    color:#007ee6;
+    font-weight: 600;
+    border-left: 3px solid rgb(184, 184, 184);
+}
+
+
+/* main column css */
+#mainCol{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1.5rem;
+    height: 92vh;
+    overflow-y:auto;
+    background-color: rgb(248, 248, 248);
+    z-index: 0;
+}
+
+.labourerSelected {
+    background-image: linear-gradient(to top, rgba(0,255,42,0.1), rgba(0,255,42,0.5));
+}
+
+.labourerLost {
+    background-image: linear-gradient(to top, rgba(252, 62, 62, 0.1), rgba(253, 62, 62, 0.5));
+}
