@@ -3,6 +3,27 @@ var db = require("../models");
 var passport = require("../config/passport");
 const sendMail = require("../config/send-mail"); 
 
+const mailCompany = async (req, labourer, data) => {
+  const companyEmail = data.dataValues.email
+      console.log("sucesss")
+      console.log(companyEmail)
+      //     //Sending a mail to the labourer informing them they have applied for a job. 
+          const mailObj = {
+            from: "info@jiffy.com.au",
+            // to: req.session.user.email,
+            to: "willygodwin47@gmail.com",
+            subject: "New Job Application", // subject line 
+            text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
+                  just applied for one of your jobs, click the link below to view</p>
+                  
+                  <a href="/employers/viewjob/${req.body.JobId}">View Job</a>
+                  `
+          }
+          sendMail(mailObj).catch((err) => console.log(err));
+          
+        }
+
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -112,40 +133,12 @@ module.exports = function(app) {
     .then(async (data) => {
       const labourer = await db.Labourer.findOne({where: {UserId: req.session.user.id}})
       console.log(labourer)
-      const companyEmail = data.dataValues.email
-      console.log("sucesss")
-      console.log(companyEmail)
-      //     //Sending a mail to the labourer informing them they have applied for a job. 
-          const mailObj = {
-            from: "willygodwin47@gmail.com",
-            // to: req.session.user.email,
-            to: "janegodwin37@gmail.com",
-            subject: "New Job Application", // subject line 
-            text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
-                  just applied for one of your jobs, click the link below to view</p>
-                  
-                  <a href="/employers/viewjob/${req.body.JobId}">View Job</a>
-                  `
-  
-          }
-          try { 
-            const result = await sendMail(mailObj); 
-            // send the response 
-            // res.json({ 
-            //   status:true, 
-            //   payload:result 
-            // }); 
-            res.json({success:true})
-  
-            
-          } catch (error) { 
-            console.error(error.message); 
-            // res.json({ 
-            //   status:false, 
-            //   payload:"Something went wrong in Sendmail Route." 
-            // }) 
-          } 
-            
+
+      mailCompany(req, labourer, data)
+
+      res.json({success:true})
+    
+      
       })
       .catch(function(err) {
           console.log("fail")
@@ -153,4 +146,3 @@ module.exports = function(app) {
       });
     })  
 };
-

@@ -93,15 +93,17 @@ router.put('/api/applicantschosenfor/:jobid', (req,res) => {
         // }) 
         .then((data) => {
             console.log(data)
-            data.forEach(element => {
-                mailChosenApplicants(res, element)
-                
-            });  
-        }) 
-        .then(()=> {
+            data.map(element => {
+                return mailChosenApplicants(element)
+            });
+
             let chosenUserId = chosenApplicants.map(user => user.UserId);
             return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
         }) 
+        // .then(()=> {
+        //     let chosenUserId = chosenApplicants.map(user => user.UserId);
+        //     return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+        // }) 
         .then(()=> {
             res.json({success:true})
         })
@@ -122,7 +124,7 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
     .catch((err) => console.log(err))
 })
 
-const mailChosenApplicants = async (res, data) =>{
+const mailChosenApplicants = (data) =>{
     const labourerEmail = data.dataValues.email
     console.log("sucesss")
     console.log(labourerEmail)
@@ -137,23 +139,8 @@ const mailChosenApplicants = async (res, data) =>{
                   <a href="http://localhost:8080/labourers/viewappliedjob">View Job</a>`
 
         }
-        try { 
-          const result = await sendMail(mailObj); 
-          // send the response 
-        //   res.json({ 
-        //     status:true, 
-        //     payload:result 
-        //   }); 
-
-          
-        } catch (error) { 
-          console.error(error.message); 
-        //   res.json({ 
-        //     status:false, 
-        //     payload:"Something went wrong in Sendmail Route." 
-        //   }) 
-        } 
-          
+        //Store error in a table default resent to false and then a loop that checks every 24hrs if the emails have been resent
+        sendMail(mailObj).catch((err) => console.log(err)); 
     }
 
 
