@@ -1,6 +1,28 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+const sendMail = require("../config/send-mail"); 
+
+const mailCompany = async (req, labourer, data) => {
+  const companyEmail = data.dataValues.email
+      console.log("sucesss")
+      console.log(companyEmail)
+      //     //Sending a mail to the labourer informing them they have applied for a job. 
+          const mailObj = {
+            from: "info@jiffy.com.au",
+            // to: req.session.user.email,
+            to: "willygodwin47@gmail.com",
+            subject: "New Job Application", // subject line 
+            text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
+                  just applied for one of your jobs, click the link below to view</p>
+                  
+                  <a href="/employers/viewjob/${req.body.JobId}">View Job</a>
+                  `
+          }
+          sendMail(mailObj).catch((err) => console.log(err));
+          
+        }
+
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -93,23 +115,34 @@ module.exports = function(app) {
     }
   });
 
-  app.post("/api/job/apply", (req,res) => {
+  app.post("/api/job/apply",  (req,res) => {
     console.log("***********************", req.session.user.id)
     db.Applied.create({
         JobId: req.body.JobId,
         UserId: req.session.user.id
     })
-    .then(function() {
-        console.log("sucesss")
-    //   console.log(req.body.user_type)
-        res.json({success:true});
-        
+    .then(() => {
+        return db.Job.findOne({where: {id: req.body.JobId}})
     })
-    .catch(function(err) {
-        console.log("fail")
-        console.log(err)
-    });
-  });
+    .then((data) =>{
+        return db.Company.findOne({where: {id: data.dataValues.CompanyId}})
+    })
+    .then((data) =>{
+        return db.User.findOne({where: {id: data.dataValues.UserId}}) 
+    })
+    .then(async (data) => {
+      const labourer = await db.Labourer.findOne({where: {UserId: req.session.user.id}})
+      console.log(labourer)
 
+      mailCompany(req, labourer, data)
+
+      res.json({success:true})
+    
+      
+      })
+      .catch(function(err) {
+          console.log("fail")
+          console.log(err)
+      });
+    })  
 };
-

@@ -1,2 +1,5 @@
 JAWSDB_URL=
 DB_PASS=
+//The below is the details for nodemailer and send in blue
+GMAIL_USER=willygodwin47@gmail.com
+GMAIL_PASS=vX0fqwBC4LsQ9H8Y

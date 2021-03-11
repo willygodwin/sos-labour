@@ -4,6 +4,7 @@ const path = require('path');
 const db = require(path.join(__dirname,'..','..','models'));
 const { Op } = require('sequelize');
 var passport = require("../../config/passport");
+const sendMail = require("../../config/send-mail"); 
 
 
 router.post('/api/postnewjob', (req,res) => {
@@ -92,9 +93,30 @@ router.put('/api/applicantschosenfor/:jobid', (req,res) => {
         })
         .then(() => { 
             let chosenUserId = chosenApplicants.map(user => user.UserId);
-            return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+            return db.User.findAll({where: {id: chosenUserId}})
+            // return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
         })
-        .then(() => res.json({success:true}))
+        // .then(() => {
+        //     return db.User.findAll({where: {id: chosenUserId}})
+        // }) 
+        .then((data) => {
+            console.log(data)
+            data.map(element => {
+                return mailChosenApplicants(element)
+            });
+
+            let chosenUserId = chosenApplicants.map(user => user.UserId);
+            return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+        }) 
+        // .then(()=> {
+        //     let chosenUserId = chosenApplicants.map(user => user.UserId);
+        //     return db.Applied.update({chosen:false},{where: {JobId: chosenApplicants[0].JobId, UserId: {[Op.not]: chosenUserId}}});
+        // }) 
+        .then(()=> {
+            res.json({success:true})
+        })
+        
+        
         .catch((err) => console.log(err))
     }else{
         res.redirect(`/employers/viewjob/${req.params.jobid}`)
@@ -110,6 +132,24 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
     .catch((err) => console.log(err))
 })
 
+const mailChosenApplicants = (data) =>{
+    const labourerEmail = data.dataValues.email
+    console.log("sucesss")
+    console.log(labourerEmail)
+    //     //Sending a mail to the labourer informing them they have applied for a job. 
+        const mailObj = {
+          from: "info@jiffy.com.au",
+          // to: req.session.user.email,
+          to: "willygodwin47@gmail.com",
+          subject: "New Job Application", // subject line 
+          text: `<p> Congratulations you have just been chosen for a job! Please click the link below to view</p>
+                  
+                  <a href="http://localhost:8080/labourers/viewappliedjob">View Job</a>`
+
+        }
+        //Store error in a table default resent to false and then a loop that checks every 24hrs if the emails have been resent
+        sendMail(mailObj).catch((err) => console.log(err)); 
+    }
 
 
 
