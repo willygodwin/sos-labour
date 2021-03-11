@@ -123,16 +123,18 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
 })
 
 const mailChosenApplicants = async (res, data) =>{
-    const companyEmail = data.dataValues.email
+    const labourerEmail = data.dataValues.email
     console.log("sucesss")
-    console.log(companyEmail)
+    console.log(labourerEmail)
     //     //Sending a mail to the labourer informing them they have applied for a job. 
         const mailObj = {
-          from: "willygodwin47@gmail.com",
+          from: "info@jiffy.com.au",
           // to: req.session.user.email,
-          to: "janegodwin37@gmail.com",
+          to: "willygodwin47@gmail.com",
           subject: "New Job Application", // subject line 
-          text: "Congratulations you have just been chosen for a job!"
+          text: `<p> Congratulations you have just been chosen for a job! Please click the link below to view</p>
+                  
+                  <a href="http://localhost:8080/labourers/viewappliedjob">View Job</a>`
 
         }
         try { 

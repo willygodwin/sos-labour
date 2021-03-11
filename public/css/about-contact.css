@@ -1,0 +1,129 @@
+body {
+	font-family: "Avenir Next", sans-serif;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+
+.jiffy-logo {
+    height: 3rem;
+    width: 6rem;
+    /* /* image-rendering: auto; */
+    image-rendering: crisp-edges;
+    /* image-rendering: pixelated; */
+
+}
+
+.navbar{
+    /* background-color: #81d4fa; */
+    padding: 0px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    color: rgba(44, 44, 44, 0.733);
+    display: flex;
+    justify-content: center;
+    background: rgba(255,255,255,0);
+    transition: all 2s;
+    
+}
+
+
+.headers-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+}
+
+.user-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 20%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.navbar a{
+    color:inherit;
+    
+}
+
+.navbar a:hover{
+    color: rgba(41, 43, 50, 0.548);
+    
+}
+
+h1 {
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+textarea {
+	min-width: 450px;
+	min-height: 200px;
+}
+
+#contact-form {
+	width: 450px;
+	margin: 50px auto;
+}
+.container {
+    width: 50%;
+    border: 15px;
+    padding: 10px;
+    margin: auto;
+    }
+
+p {
+    text-align: justify;
+    color: black;
+    }
+
+footer{
+    /* padding: 64px 0 0; */
+    /* text-align: center; */
+    background-color: #F7F7F7 !important;
+    border-top: 1px solid #DDDDDD !important;
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-div{
+    /* width: 50%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-div a{
+    color: black;
+    
+}
+
+.footer-allrights {
+    
+    text-align: center;
+}
+hr {
+    width: 17rem;
+    margin: none;
+}
+
+.centered {
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+}

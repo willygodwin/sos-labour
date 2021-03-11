@@ -109,7 +109,9 @@ module.exports = function(app) {
     .then((data) =>{
         return db.User.findOne({where: {id: data.dataValues.UserId}}) 
     })
-    .then(async (data) =>{
+    .then(async (data) => {
+      const labourer = await db.Labourer.findOne({where: {UserId: req.session.user.id}})
+      console.log(labourer)
       const companyEmail = data.dataValues.email
       console.log("sucesss")
       console.log(companyEmail)
@@ -117,26 +119,31 @@ module.exports = function(app) {
           const mailObj = {
             from: "willygodwin47@gmail.com",
             // to: req.session.user.email,
-            to: companyEmail,
+            to: "janegodwin37@gmail.com",
             subject: "New Job Application", // subject line 
-            text: "You have a just applied for a new job "
+            text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
+                  just applied for one of your jobs, click the link below to view</p>
+                  
+                  <a href="/employers/viewjob/${req.body.JobId}">View Job</a>
+                  `
   
           }
           try { 
             const result = await sendMail(mailObj); 
             // send the response 
-            res.json({ 
-              status:true, 
-              payload:result 
-            }); 
+            // res.json({ 
+            //   status:true, 
+            //   payload:result 
+            // }); 
+            res.json({success:true})
   
             
           } catch (error) { 
             console.error(error.message); 
-            res.json({ 
-              status:false, 
-              payload:"Something went wrong in Sendmail Route." 
-            }) 
+            // res.json({ 
+            //   status:false, 
+            //   payload:"Something went wrong in Sendmail Route." 
+            // }) 
           } 
             
       })

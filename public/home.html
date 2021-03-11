@@ -15,7 +15,7 @@
     <nav class="navbar">
 
         <div class="headers-container">
-            <span class="navbar-brand mb-0 h1"><a href="/"><img  class="jiffy-logo"src="images/jiffy-6.png" alt="jiffy logo"></a></span>
+            <span class="navbar-brand mb-0 h1"><a href="/home"><img  class="jiffy-logo"src="images/jiffy-6.png" alt="jiffy logo"></a></span>
             <div class="user-container">
                 <div>
                     <a href="/login"><i class="fas fa-user-circle" id="userIcon"></i> Log In</a>
@@ -23,11 +23,7 @@
                 <a href="/signup">Sign Up</a>
             </div>
         </div>
-              
-        
-        
-        
-        
+    
     </nav>
 
     
@@ -46,31 +42,36 @@
 
     <br>
     <br>
-
-    <div class="benefits-container">
-        <div class="benefits1">
-            <div class="benefits-body">
-                <h3>Freedom of Choice</h3>
-                <p>Site-managers posting a job will have many labourers applying for that job giving them the freedom of choice to choose the labourer
-                    most suited to the job.</p>
+    <div >
+        <span class="navbar-brand mb-0 h1"><img src="images/jiffy-6.png" alt="jiffy logo"></span>
+       
+      </div>
+    <!-- <div class="benefits-backgroundimage-container"> -->
+        <div class="benefits-container">
+            <div class="benefits1">
+                <div class="benefits-body">
+                    <h4>Freedom of Choice</h4>
+                    <p>Site-managers posting a job will have many labourers applying for that job giving them the freedom of choice to choose the labourer
+                        most suited to the job.</p>
+                </div>
+                <img src="images/pickaxe.png" alt="pickaxe">
             </div>
-            <img src="images/pickaxe.png" alt="pickaxe">
-        </div>
-        <div class="benefits2">
-            <img src="images/excavator.png" alt="excavator">
-            <div class="benefits-body">
-                <h4>Cost Effective</h4>
-                <p>Cost effective solution as labourers are directly engaged removing mark-up costs from third parties.</p>
+            <div class="benefits2">
+                <img src="images/excavator.png" alt="excavator">
+                <div class="benefits-body">
+                    <h4>Cost Effective</h4>
+                    <p>Cost effective solution as labourers are directly engaged removing mark-up costs from third parties.</p>
+                </div>
             </div>
-        </div>
-        <div class="benefits3">
-            <div class="benefits-body">
-                <h4>Efficient Solution</h4>
-                <p>Quick, easy and effective solution to find labour efficient labour putting site-managers directly in contact with labourers.</p>
+            <div class="benefits3">
+                <div class="benefits-body">
+                    <h4>Efficient Solution</h4>
+                    <p>Quick, easy and effective solution to find efficient labour. Connecting site-managers directly with nearby labourers.</p>
+                </div>
+                <img src="images/hardhat3.png" alt="hardhat">
             </div>
-            <img src="images/hardhat3.png" alt="hardhat">
-        </div>
-    </div> 
+        </div> 
+    <!-- </div> -->
     
     <br><br>
     
@@ -105,6 +106,13 @@
             }
         
     });
+    
+    const getStarted = document.querySelector(".get-started-button")
+    getStarted.addEventListener("click", (event) =>{
+        window.location.replace("/signup");
+        }
+    )
+    
         
     </script>
 

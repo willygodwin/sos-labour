@@ -25,6 +25,7 @@ body {
     background: rgba(255,255,255,0);
     transition: all 2s;
     
+    
 }
 
 .navbar.scrolling{
@@ -118,15 +119,25 @@ a:hover{
     padding: 0px 32px;
 }
 
+.benefits-backgroundimage-container{
+    width: 100vw;
+    background-image: url(../images/jiffy-6.png);
+
+}
+
 .benefits-container {
-    
+
+    position: absolute;
+    top: 90%;
+    transform: translateY(-5%);
     left: 0px;
     right: 0px;
     width: 50%;
     /* text-align: center; */
     margin: 0px auto;
-    
+    /* background-image: url(../images/jiffy-6.png); */
     padding: 0px 32px;
+    z-index: 900;
 }
 
 .benefits1{
