@@ -194,32 +194,7 @@
                                 <button data-userid="<%= user.User.Labourer.UserId %>">Selected</button>
                             </div>
                         </div>
-                    <%_ } else { _%>
-                        <div class="card userCard rejectedUser" data-userid="<%= user.User.Labourer.UserId %>">
-                            <div class="card-body">
-                                <div>
-                                    <span>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </span>
-                                    <span>Driver Licence: 
-                                        <%_ if (user.User.Labourer.driver_license){ _%>
-                                            YES
-                                        <%_ }else{ _%>
-                                            NO
-                                        <%_ } _%>
-                                    </span>
-                                    <span>Whitecard: 
-                                        <%_ if (user.User.Labourer.whitecard){ _%>
-                                            YES
-                                        <%_ }else{ _%>
-                                            NO
-                                        <%_ } _%>
-                                    </span>
-                                </div>
-                                <div>
-                                    Skills & Experiences: <%= user.User.Labourer.skills_experience %>
-                                </div>
-                                <button data-userid="<%= user.User.Labourer.UserId %>">Rejected</button>
-                            </div>
-                        </div>
+
                     <%_ } _%>
                 <%_ } _%>
             </div>

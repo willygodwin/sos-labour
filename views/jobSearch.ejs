@@ -8,30 +8,43 @@
             <%- include('partials/sidebar-labourer',{highlightDashboard: '', highlightAppliedJob: '', highlightSearchJob:'highlight', name: `${name}` }) %>
     </div>
     <div class="col-10" id="mainCol">
-      <!-- <div><button> Find Labourers</button></div> -->
-      <h3>Job's Available</h3>
-      <div class="postedJobs">
-        <%_ for (let job of jobs){ _%>
-          <%_ if(job.dataValues.job_status == 'open'){ _%>
-            <div class="card jobCard" >
-              <div class="card-header">
-                <%= job.dataValues.address %>
-              </div>
-                <div class="card-body card-body-jobsearch">
-                  <div class="job-info-div">
-                    <p class="card-text">Start Date: <%= job.dataValues.start_date %> </p>
-                    <p class="card-text">End Date: <%= job.dataValues.end_date %> </p>
-                    <p class="card-text">Site Manager: <%= job.dataValues.site_manager %> </p>
-                    <p class="card-text">Number of Applicants: <%= job.dataValues.number_of_labourers %> </p>
-                  </div>
-                  <div class="apply-button-div">
-                    <button class="btn btn-apply" data-jobID="<%= job.dataValues.id %>" data-status="withdrawn" >Apply</button>
-                  </div>
-              </div>
-            </div>    
-          <%_ } _%>
-        <%_ } _%>
-                
+      <div class="view-posted-jobs-card">
+        <div class="view-posted-jobs-title">Available Jobs</div>
+        <div class="appliedJobs table-responsive">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Job Address</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Site Manager</th>
+                  <th scope="col">Labourers Required</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <% let hash = 1 %>
+                  <%_ for (let job of jobs){ _%>
+                    <%_ if (job.job_status === 'open'){ _%>
+                        <th scope="row" class ="labourerOpen"><%= hash %></th>
+                        <td>
+                          <i class="fas fa-map-marked-alt map-icon" data-jobAddress="<%= `${job.address},${job.suburb},${job.city},${job.state},${job.postcode}` %>"></i>
+                          <%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %>
+                        </td>
+                        <td><%= job.start_date.split("-").reverse().join("-") %></td>
+                        <td><%= job.end_date.split("-").reverse().join("-") %></td>
+                        <td><%= job.site_manager %></td>
+                        <td><%= job.number_of_labourers %></td>
+                        <td><button class="btn btn-apply" data-jobID="<%= job.dataValues.id %>" data-status="withdrawn" >Apply</button></td>  
+                    <%_ } _%>
+                </tr>
+                    <% hash++ %>
+                <%_ } _%>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

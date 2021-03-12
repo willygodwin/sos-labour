@@ -21,7 +21,7 @@ const handleMapIcon =() => {
             window.open(
                 `https://www.google.com/maps/place/${address}`,
                 '_blank'
-            );
+            );``
         })
     })
 }

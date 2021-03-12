@@ -8,15 +8,6 @@ const handleViewAppliedJob = () => {
     });
 };
 
-const handleBackToDashboardBtn = () => {
-    const backBtn = document.querySelector('#backToDashboardBtn');
-    backBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const origin = window.location.origin;
-        location.href = `${origin}/labourers/dashboard`;
-    })
-};
-
 const resignApplication = (jobAddress) => 
         fetch(`/api/resignapplication/${jobAddress}`,{
             method: 'DELETE',
@@ -38,15 +29,6 @@ const handleResignBtn = () => {
     })
 };
 
-const handleSearchJobsBtn = () => {
-    const searchJobsBtn = document.querySelector('#searchJobsBtn');
-    searchJobsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const origin = window.location.origin;
-        location.href = `${origin}/labourers/jobsearch`;
-    })
-}
-
 const handleDashboardSidebar = () => {
     const dashboard = document.querySelector('#dashboardText');
     dashboard.addEventListener('click', (e) => {
@@ -65,14 +47,30 @@ const handleSearchJobSidebar = () => {
     })
 }
 
+const handleMapIcon =() => {
+    const map = document.querySelectorAll('.map-icon')
+    map.forEach((icon) => {
+        icon.addEventListener('click', (e) =>{
+            e.preventDefault();
+            const address = e.currentTarget.getAttribute('data-jobAddress').toLowerCase().replace(/[\s,-/.]+/g, '+')
+            console.log(address);
+            window.open(
+                `https://www.google.com/maps/place/${address}`,
+                '_blank'
+            );
+        })
+    })
+}
+
 handleDashboardSidebar();
 handleViewAppliedJob();
 handleSearchJobSidebar();
 
 if (window.location.pathname === '/labourers/dashboard'){
-    handleSearchJobsBtn();
+    handleMapIcon();
 }    
 
 if (window.location.pathname === '/labourers/viewappliedjob'){
     handleResignBtn();
+    handleMapIcon();
 }
