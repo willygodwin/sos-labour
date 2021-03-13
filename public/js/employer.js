@@ -130,8 +130,11 @@ const selectBtnEvent = (e) => {
             console.log(`User Counter : ${chosenApplicants.length}`);
             const selectButton = e.currentTarget;
             const userCard = e.currentTarget.parentNode.parentNode;
-            userCard.style.backgroundImage = 'linear-gradient(to top, rgba(0,255,42,0.1), rgba(0,255,42,0.5))';
-            userCard.style.border = '2px solid black';
+            userCard.style.boxShadow = '4px 4px 8px -2px rgba(0,0,0,1)';
+            const photoBackground = e.currentTarget.parentNode.previousElementSibling.children[0];
+            photoBackground.style.backgroundColor = 'white'
+            const labourerName = e.currentTarget.parentNode.previousElementSibling.children[1];
+            labourerName.style.backgroundColor = '#007fe659';
             selectButton.textContent = 'Unselect';
         }
     }else{
@@ -140,8 +143,11 @@ const selectBtnEvent = (e) => {
         console.log(`User Counter : ${chosenApplicants.length}`);
         const unselectButton = e.currentTarget;
         const userCard = e.currentTarget.parentNode.parentNode;
-        userCard.style.backgroundImage = null;
-        userCard.style.border = null;
+        userCard.style.boxShadow = '0 4px 8px 0 rgba(0,0,0,0.2)';
+        const photoBackground = e.currentTarget.parentNode.previousElementSibling.children[0];
+        photoBackground.style.backgroundColor = null;
+        const labourerName = e.currentTarget.parentNode.previousElementSibling.children[1];
+        labourerName.style.backgroundColor = null;
         unselectButton.textContent = 'Select';
     }  
 }
