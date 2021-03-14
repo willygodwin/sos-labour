@@ -7,54 +7,60 @@
     <div class="col-2" id="sidebarCol">
             <%- include('partials/sidebar-labourer',{highlightDashboard: '', highlightAppliedJob: 'highlight', highlightSearchJob:'', name: `${name}` }) %>
     </div>
-    <div class="col-10" id="mainCol">
-      <div><button id="backToDashboardBtn"> Back to Dashboard</button></div>
-      <h3>All Applied Job</h3>
-      <div class="appliedJobs table-responsive">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Job Address</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% let hash = 1 %>
-              <%_ for (let job of applied){ _%>
-                  <%_ if (job.dataValues.chosen === true){ _%>
-                      <tr class ="labourerSelected">
-                  <%_ } else if (job.dataValues.chosen === null) { _%>
-                      <tr class ="labourerOpen"> 
-                  <%_ } else { _%>
-                      <tr class ="labourerLost">
-                  <%_ } _%>
-                      <th scope="row"><%= hash %></th>
-                      <td><%= job.dataValues.Job.address %></td>
-                      <td><%= job.dataValues.Job.start_date %></td>
-                      <td><%= job.dataValues.Job.end_date %></td>
-                      <%_ if (job.dataValues.chosen === true){ _%>
-                          <td>Selected</td>
-                          <td></td>
-                      <%_ } else if (job.dataValues.chosen === null) { _%>
-                          <td>Open</td>
-                          <td><button class="resignBtn" data-jobAddress="<%= job.dataValues.Job.address%>">Resign</button></td>  
-                      <%_ } else { _%>
-                          <td>Lost</td>
-                          <td></td>
-                      <%_ } _%>
+    <main class="col-10" id="mainCol">
+      <div class="view-posted-jobs-card">
+        <div class="view-posted-jobs-title">All Applied Job</div>
+        <div class="appliedJobs table-responsive">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Job Address</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Site Manager</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <% let hash = 1 %>
+                <%_ for (let job of applied){ _%>
+                    <%_ if (job.dataValues.chosen === true){ _%>
+                        <th scope="row" class ="labourerSelected"><%= hash %></th>
+                    <%_ } else if (job.dataValues.chosen === null) { _%>
+                        <th scope="row" class ="labourerOpen"><%= hash %></th>
+                    <%_ } else { _%>
+                        <th scope="row" class ="labourerLost"><%= hash %></th>
+                    <%_ } _%>
+                        
+                        <td>
+                          <i class="fas fa-map-marked-alt map-icon" data-jobAddress="<%= `${job.Job.address},${job.Job.suburb},${job.Job.city},${job.Job.state},${job.Job.postcode}` %>"></i>
+                          <%= `${job.Job.address}, ${job.Job.suburb}, ${job.Job.city}, ${job.Job.state}, ${job.Job.postcode}` %>
+                        </td>
+                        <td><%= job.dataValues.Job.start_date.split("-").reverse().join("-") %></td>
+                        <td><%= job.dataValues.Job.end_date.split("-").reverse().join("-") %></td>
+                        <td><%= job.dataValues.Job.site_manager %></td>
+                        <%_ if (job.dataValues.chosen === true){ _%>
+                            <td>Selected</td>
+                            <td></td>
+                        <%_ } else if (job.dataValues.chosen === null) { _%>
+                            <td>Open</td>
+                            <td><button class="resignBtn" data-jobAddress="<%= job.dataValues.Job.address%>">Resign</button></td>  
+                        <%_ } else { _%>
+                            <td>Lost</td>
+                            <td></td>
+                        <%_ } _%>
                   </tr>
-                  <% hash++ %>
-              <%_ } _%>
-          </tbody>
-        </table>
-        
-                
+                    <% hash++ %>
+                <%_ } _%>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+
+    </main>
   </div>
 
 

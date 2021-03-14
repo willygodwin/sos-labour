@@ -7,7 +7,7 @@
     <div class="col-2" id="sidebarCol">
         <%- include('partials/sidebar' , {highlightDashboard: '', highlightViewJob: 'highlight', highlightPostJob:'', name: `${name}`}) %>
     </div>
-        <main class="col-6 post-new-job-col" id="mainCol">
+        <main class="col-7 post-new-job-col" id="mainCol">
         
         
     <%_ if(job.job_status == 'open'){ _%>
@@ -71,34 +71,43 @@
                 </form>
             </div>
         </main>
-        <aside class="col-4" id="list-of-applicants-col">
+        <aside class="col-3" id="list-of-applicants-col">
             <div class="list-of-applicants-card">
                 <div>List of Applicants <span><button id="choseApplicantsButton">Choose Applicants</button></span></div>
                 <br>
                 <% for (let user of applicants){ %>
-                    <div class="card userCard" data-userid="<%= user.User.Labourer.UserId %>">
-                        <div class="card-body">
-                            <div>
-                                <span>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </span>
-                                <span>Driver Licence: 
+                    <div class="userCard flip-card" data-userid="<%= user.User.Labourer.UserId %>">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="labourer-photo-background">
+                                    <img src="/asset/images/user-icon.svg" alt="user-photo" class="labourer-photo">
+                                </div>
+                                <div class="labourer-name-front-side"><%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %></div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </div>
+                                <hr>
+                                <div>Driver Licence: 
                                     <%_ if (user.User.Labourer.driver_license){ _%>
                                         YES
                                     <%_ }else{ _%>
                                         NO
                                     <%_ } _%>
-                                </span>
-                                <span>Whitecard: 
+                                </div>
+                                <hr>
+                                <div>Whitecard: 
                                     <%_ if (user.User.Labourer.whitecard){ _%>
                                         YES
                                     <%_ }else{ _%>
                                         NO
                                     <%_ } _%>
-                                </span>
+                                </div>
+                                <hr>
+                                <div class="skill-and-experience-text">
+                                    Skills & Experiences: <%= user.User.Labourer.skills_experience %>
+                                </div>
+                                <button class="selectUser" data-userid="<%= user.User.Labourer.UserId %>">Select</button>
                             </div>
-                            <div>
-                                Skills & Experiences: <%= user.User.Labourer.skills_experience %>
-                            </div>
-                            <button class="selectUser" data-userid="<%= user.User.Labourer.UserId %>">Select</button>
                         </div>
                     </div>
                 <% } %>
@@ -163,61 +172,44 @@
                 </form>
             </div>
         </main>
-        <aside class="col-4" id="list-of-applicants-col">
+        <aside class="col-3" id="list-of-applicants-col">
             <div class="list-of-applicants-card">
                 <div>List of Applicants </div>
                 <br>
                 <% for (let user of applicants){ %>
                     <%_ if (user.chosen == true){ _%>
-                        <div class="card userCard selectedUser" data-userid="<%= user.User.Labourer.UserId %>">
-                            <div class="card-body">
-                                <div>
-                                    <span>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </span>
-                                    <span>Driver Licence: 
+                        <div class="userCard flip-card" data-userid="<%= user.User.Labourer.UserId %>">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="labourer-photo-background selected-labourer-photo">
+                                        <img src="/asset/images/user-icon.svg" alt="user-photo" class="labourer-photo ">
+                                    </div>
+                                    <div class="labourer-name-front-side selected-labourer-name"><%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %></div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </div>
+                                    <hr>
+                                    <div>Driver Licence: 
                                         <%_ if (user.User.Labourer.driver_license){ _%>
                                             YES
                                         <%_ }else{ _%>
                                             NO
                                         <%_ } _%>
-                                    </span>
-                                    <span>Whitecard: 
+                                    </div>
+                                    <hr>
+                                    <div>Whitecard: 
                                         <%_ if (user.User.Labourer.whitecard){ _%>
                                             YES
                                         <%_ }else{ _%>
                                             NO
                                         <%_ } _%>
-                                    </span>
-                                </div>
-                                <div>
-                                    Skills & Experiences: <%= user.User.Labourer.skills_experience %>
-                                </div>
-                                <button data-userid="<%= user.User.Labourer.UserId %>">Selected</button>
-                            </div>
-                        </div>
-                    <%_ } else { _%>
-                        <div class="card userCard rejectedUser" data-userid="<%= user.User.Labourer.UserId %>">
-                            <div class="card-body">
-                                <div>
-                                    <span>Name: <%= user.User.Labourer.first_name + " " + user.User.Labourer.last_name %> </span>
-                                    <span>Driver Licence: 
-                                        <%_ if (user.User.Labourer.driver_license){ _%>
-                                            YES
-                                        <%_ }else{ _%>
-                                            NO
-                                        <%_ } _%>
-                                    </span>
-                                    <span>Whitecard: 
-                                        <%_ if (user.User.Labourer.whitecard){ _%>
-                                            YES
-                                        <%_ }else{ _%>
-                                            NO
-                                        <%_ } _%>
-                                    </span>
-                                </div>
-                                <div>
-                                    Skills & Experiences: <%= user.User.Labourer.skills_experience %>
-                                </div>
-                                <button data-userid="<%= user.User.Labourer.UserId %>">Rejected</button>
+                                    </div>
+                                    <hr>
+                                    <div class="skill-and-experience-text">
+                                        Skills & Experiences: <%= user.User.Labourer.skills_experience %>
+                                    </div>
+                                    <div class="selectedUserBtn" data-userid="<%= user.User.Labourer.UserId %>">Selected</div>
+                                </div> 
                             </div>
                         </div>
                     <%_ } _%>

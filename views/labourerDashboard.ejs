@@ -8,24 +8,36 @@
             <%- include('partials/sidebar-labourer', {highlightDashboard: 'highlight', highlightAppliedJob: '', highlightSearchJob:'', name: `${name}` }) %>
     </div>
     <div class="col-sm-10" id="mainCol">
-      <!-- <h2>Welcome: <%# labourerName %></h2> -->
-      <br>
-      <div><button id="searchJobsBtn"> Search Jobs</button></div>
-      <br>
-      <h3>Upcoming Job</h3>
-      <div class="appliedJobs">
+  
+      <div class="dashboard-header">Upcoming Job</div>
+      <div class=" row postedJobs">
         <%_ for (let job of applied){ _%>
-            <div class="card jobCard labourerSelected" data-jobID="<%= job.dataValues.id %>">
-              <div class="card-header">
-                <%= job.dataValues.Job.address %>
+          <div class="col-sm-4">
+            <div class="card jobCard" data-applied-id="<%= job.id %>">
+              <div class="card-header closedStatus ">
+                <i class="fas fa-check-circle" id="tick-icon"></i>
+                  <div>
+                    <p class="card-header-text">Upcoming Job</p>
+                  </div>
+                  <button class="view-job-btn" data-jobid="<%= job.Job.id %>"> View Job</button>
               </div>
-              <div class="card-body">
-                <p class="card-text">Start Date: <%= job.dataValues.Job.start_date %> </p>
-                <p class="card-text">End Date: <%= job.dataValues.Job.end_date %> </p>
-                <p class="card-text">Site Manager: <%= job.dataValues.Job.site_manager %> </p>
-                <p class="card-text">Status: Chosen </p>
+              <div class="card-body dashboard-cardBody">
+                <div class="job-address">
+                  <i class="fas fa-map-marked-alt map-icon" data-jobAddress="<%= `${job.Job.address},${job.Job.suburb},${job.Job.city},${job.Job.state},${job.Job.postcode}` %>"></i>
+                  <span class="job-address-text">
+                    <div><%= `${job.Job.address.toUpperCase()}` %></div>
+                    <div><%= `${job.Job.suburb.toUpperCase()}` %></div>
+                    <div><%= `${job.Job.city.toUpperCase()}, ${job.Job.state.toUpperCase()}, ${job.Job.postcode.toUpperCase()}` %></div>
+                  </span>
+                </div>
+                <hr>
+                <p class="card-text"><strong class="strong-text">Start Date</strong> <span class="colon">:</span><%= job.dataValues.Job.start_date.split("-").reverse().join("-") %> </p>
+                <p class="card-text"> <strong class="strong-text">End Date</strong> <span class="colon">:</span><%= job.dataValues.Job.end_date.split("-").reverse().join("-") %> </p>
+                <p class="card-text"><strong class="strong-text">Site Manager</strong> <span class="colon">:</span><%= job.dataValues.Job.site_manager %> </p>
               </div>
             </div> 
+          </div>
+            
         <%_ } _%>
                 
       </div>
