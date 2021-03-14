@@ -12,12 +12,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const dobInput = document.querySelector("input#date-input");
     const driversLicenseInput = document.querySelector("input#driver-license");
     const whiteCardInput = document.querySelector("input#white-card");
-    const skillsInput = document.querySelector("input#skills");
+    const skillsInput = document.querySelector("#skills");
     const profilePicInput = document.querySelector("input#profilePic");
+
+    profilePicInput.addEventListener('change', checkPhoto)
+
 
 
     signUpForm.addEventListener('click', (event) => {
         event.preventDefault();
+
+        if (!firstNameInput.value.trim() || !lastNameInput.value.trim() || !dobInput.value.trim() || !whiteCardInput.value.trim()) {
+            document.getElementById('alert').style.display = "block"
+            return;
+        }
 
         console.log(profilePicInput.files[0])
 
@@ -44,10 +52,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
                 };
-                if (!userData.first_name || !userData.last_name || !userData.dob || !userData.whitecard) {
-                    document.getElementById('alert').style.display = "block"
-                    return;
-                }
+                
 
                 signUpLabourer( userData );
                 
@@ -120,6 +125,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
           reader.onload = () => resolve(reader.result);
           reader.onerror = error => reject(error);
         });
+    }
+
+    function checkPhoto() {
+        if(this.files[0].type.indexOf("image") == -1) {
+            document.getElementById("photoErr").innerHTML = "File not supported";
+            return false;
+        }
+        if(this.files[0].size > 102400) {
+            document.getElementById("photoErr").innerHTML = "Image too big (max 100kb)";
+            return false;
+        }
+        document.getElementById("photoErr").innerHTML = "";
+        return true;
     }
 
     function handleLoginErr(err) {

@@ -63,7 +63,7 @@ module.exports = function(app) {
   app.post("/api/labourerdetails", function(req, res) {
     // console.log(req.body.first_name, req.body.last_name, req.body.dob, req.body.driver_license, 
       // req.body.whitecard, req.body.skills_experience)
-      console.log(req.body.img_reference, req.body.base64IMG)
+      // console.log(req.body.img_reference, req.body.base64IMG)
 
       const imgContents = req.body.base64IMG.split(',')[1];
 
