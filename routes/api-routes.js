@@ -2,6 +2,8 @@
 var db = require("../models");
 var passport = require("../config/passport");
 const sendMail = require("../config/send-mail"); 
+const fs = require('fs')
+const path = require('path')
 
 const mailCompany = async (req, labourer, data) => {
   const companyEmail = data.dataValues.email
@@ -11,7 +13,7 @@ const mailCompany = async (req, labourer, data) => {
           const mailObj = {
             from: "info@jiffy.com.au",
             // to: req.session.user.email,
-            to: "willygodwin47@gmail.com",
+            to: companyEmail,
             subject: "New Job Application", // subject line 
             text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
                   just applied for one of your jobs, click the link below to view</p>
@@ -61,6 +63,22 @@ module.exports = function(app) {
   app.post("/api/labourerdetails", function(req, res) {
     // console.log(req.body.first_name, req.body.last_name, req.body.dob, req.body.driver_license, 
       // req.body.whitecard, req.body.skills_experience)
+      // console.log(req.body.img_reference, req.body.base64IMG)
+
+      const imgContents = req.body.base64IMG.split(',')[1];
+
+      if (typeof Buffer.from === "function") {
+        // Node 5.10+
+        buf = Buffer.from(imgContents, 'base64'); // Ta-da
+      } else {
+        // older Node versions, now deprecated
+        buf = new Buffer(imgContents, 'base64'); // Ta-da
+      }
+      fs.writeFile(path.join(__dirname, "..", "public", "asset", "images", req.body.img_reference), buf, err => {
+        console.log(err)
+        //
+        })
+
     db.Labourer.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name, 
@@ -68,7 +86,8 @@ module.exports = function(app) {
       driver_license: req.body.driver_license ,
       whitecard: req.body.whitecard, 
       skills_experience: req.body.skills_experience,
-      UserId: req.body.UserId
+      UserId: req.body.UserId,
+      img_reference: req.body.img_reference
     })
       .then(function() {
         res.redirect("/");

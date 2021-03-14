@@ -69,8 +69,13 @@ h1 {
 	padding-bottom: 20px;
 }
 
-textarea {
+textarea #message {
 	min-width: 450px;
+	min-height: 200px;
+}
+
+textarea #skills{
+	/* min-width: 450px; */
 	min-height: 200px;
 }
 

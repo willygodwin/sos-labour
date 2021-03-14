@@ -139,7 +139,8 @@ router.get('/labourers/dashboard', isAuthenticated, (req,res) => {
         .then((data3) => {
             res.render('labourerDashboard',{
                 applied:data3.Applied,
-                name: data3.first_name + " " + data3.last_name
+                name: data3.first_name + " " + data3.last_name,
+                image: data3.img_reference
             })
         })
         .catch((err) => console.log(err));
@@ -170,7 +171,8 @@ router.get('/labourers/viewappliedjob', isAuthenticated, (req,res) => {
             // res.json(data3);
             res.render('labourerViewAppliedJob',{
                 applied:data3.Applied,
-                name: data3.first_name + " " + data3.last_name
+                name: data3.first_name + " " + data3.last_name,
+                image: data3.img_reference
             })
         })
         .catch((err) => console.log(err));
@@ -202,7 +204,7 @@ router.get('/labourers/jobsearch', isAuthenticated, (req,res) => {
                 where: {UserId: req.user.id}
             });
             data2.name = labourer.first_name + " " + labourer.last_name;
-            res.render('jobSearch',{jobs: data2, name: data2.name });
+            res.render('jobSearch',{jobs: data2, name: data2.name, image: labourer.img_reference });
             
         })
         .catch((err) => console.log(err));

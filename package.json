@@ -25,6 +25,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "filereader": "^0.10.3",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "passport": "^0.4.1",

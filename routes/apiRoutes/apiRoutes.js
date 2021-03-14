@@ -140,7 +140,7 @@ const mailChosenApplicants = (data) =>{
         const mailObj = {
           from: "info@jiffy.com.au",
           // to: req.session.user.email,
-          to: "willygodwin47@gmail.com",
+          to: labourerEmail,
           subject: "New Job Application", // subject line 
           text: `<p> Congratulations you have just been chosen for a job! Please click the link below to view</p>
                   

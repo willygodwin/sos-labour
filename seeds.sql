@@ -14,11 +14,11 @@ INSERT INTO companies (company_name,abn,UserId) VALUES
 ('summit homes','62579898646',2);
 
 
-INSERT INTO labourers (first_name,last_name,dob,driver_license,whitecard,skills_experience,UserId) VALUES
-('vincent','sumargo','16-04-1992','123456789','10001000','bricklaying for 5 years',3),
-('william','godwin','01-01-1992','987654321','10002000','roofing and tiling for 5 years',4),
-('naresh','rajmandu','02-02-1975','112233445','10003000','gypsum and plasterboard for 5 years',5),
-('ayshaa','jacintha','03-03-1988','667788990','10004000','electrical and plumbing for 5 years',6);
+INSERT INTO labourers (first_name,last_name,dob,driver_license,whitecard,skills_experience,UserId, img_reference) VALUES
+('vincent','sumargo','16-04-1992','123456789','10001000','bricklaying for 5 years',3, "burger.jpg"),
+('william','godwin','01-01-1992','987654321','10002000','roofing and tiling for 5 years',4, 'IMG-0476.jpg'),
+('naresh','rajmandu','02-02-1975','112233445','10003000','gypsum and plasterboard for 5 years',5, "burger.jpg"),
+('ayshaa','jacintha','03-03-1988','667788990','10004000','electrical and plumbing for 5 years',6, 'IMG-0476.jpg');
 
 INSERT INTO jobs (address,suburb,city,state,postcode,site_manager,start_date,end_date,number_of_labourers,CompanyId) VALUES
 ('27 macleod road', 'applecross', 'perth','WA','6153','cameron smith','2021-03-15','2021-03-16',1,1),
