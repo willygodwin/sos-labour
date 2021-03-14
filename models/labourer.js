@@ -24,6 +24,9 @@ module.exports = function(sequelize, DataTypes) {
         skills_experience:{
             type: DataTypes.TEXT,
         },
+        img_reference:{
+            type: DataTypes.STRING,
+        },
         // user_id: {
         //     type: DataTypes.INTEGER,
         //     allowNull: false,
