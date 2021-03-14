@@ -13,7 +13,7 @@ const mailCompany = async (req, labourer, data) => {
           const mailObj = {
             from: "info@jiffy.com.au",
             // to: req.session.user.email,
-            to: "willygodwin47@gmail.com",
+            to: companyEmail,
             subject: "New Job Application", // subject line 
             text: `<p> ${labourer.dataValues.first_name} ${labourer.dataValues.last_name} 
                   just applied for one of your jobs, click the link below to view</p>
