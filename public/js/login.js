@@ -46,12 +46,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             window.location.replace("/");
                             // If there's an error, log the error
                         } else {
-                            alert('something went wrong!');
+                            // alert('something went wrong!');
+                            handleLoginErr() ;
+                            
                         }
                     }).catch(err => {
                         console.log(err)
                     });
             }
-
+            function handleLoginErr() {
+                document.getElementById('alert').style.display = "block"
+                const alert = document.querySelector("#alert .msg")
+                console.log(alert)
+                alert.textContent = "Please enter a valid username and password";   
+        
+            }
 
 });

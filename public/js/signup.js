@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
             // If we have an email and password we run the loginUser function and clear the form
+        
         signUpUser(userData.email, userData.password, userData.user_type);
         emailInput.value = "";
         passwordInput.value= "";
-       
-
+    
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
     function signUpUser(email, password, user_type) {
@@ -59,30 +59,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     }
                    
                     // If there's an error, log the error
-                } else {
-                    alert('something went wrong!');
+                } 
+                else {
+                    handleLoginErr(err)
                 }
-            }).catch(handleLoginErr);
+            }).catch((err) => {
+                console.log("hello")
+                handleLoginErr(err)
+            });
     }
-
-    // function signUpUser(email, password, user_type) {
-    //     $.post("/api/signup", {
-    //       email: email,
-    //       password: password,
-    //       user_type: user_type
-    //     })
-    //       .then(function(data) {
-    //         // window.location.replace("/labourerdetails");
-    //         // If there's an error, handle it by throwing up a bootstrap alert
-    //       })
-    //       .catch(handleLoginErr);
-    //   }
-    
 
 
     function handleLoginErr(err) {
+        document.getElementById('alert').style.display = "block"
         const alert = document.querySelector("#alert .msg")
-        alert.textContent = err.responseJSON;   
+        console.log(alert)
+        alert.textContent = "Please enter a valid username and password";   
+
     }
 
 });
