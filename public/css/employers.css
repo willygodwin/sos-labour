@@ -185,6 +185,13 @@ body{
     box-shadow: 0 0 20px white;
 }
 
+.no-jobs-text-dashboard{
+    margin: 1rem 5rem;
+    color: grey;
+    font-style:italic;
+    font-size: 0.9rem;
+}
+
 .postedJobs{
     display: flex;
     /* justify-content: space-between; */
@@ -431,6 +438,13 @@ tbody{
     border-radius: 0.25em;
 }
 
+.no-jobs-text-viewpostedjobs{
+    font-size: 0.9rem;
+    position: relative;
+    left: 300px;
+    color: grey;
+    font-style:italic;
+}
 
 /* view job by ID html*/
 .view-job-byId-card{
@@ -441,7 +455,25 @@ tbody{
     
 }
 
+#editJob, #deleteJob, #updateJob {
+    border: none;
+    background-color: rgb(223, 223, 223);
+    text-shadow: 0 0 2px black;
+    font-size: 0.8rem;
+}
 
+#editJob:hover, #updateJob:hover{
+    background-color: rgb(231, 243, 255);
+    color:#007ee6;
+    text-shadow: none;
+    box-shadow: 2px 2px 4px grey;
+}
+
+#deleteJob:hover{
+    background-color: rgb(255, 71, 71);
+    text-shadow: none;
+    box-shadow: 2px 2px 4px grey;
+}
 #list-of-applicants-col{
     overflow-y: auto;
     height: 92vh;
@@ -583,14 +615,9 @@ tbody{
 
 /* calendar */
 #calendar{
-    border: 1px solid black;
     border-radius: 5px;
     margin: 1rem 2rem;
     padding: 1rem;
-    /* font-weight: 700;
-    font-size: 1.2rem; */
-    /* color: white; */
-    /* text-shadow: 1px 1px 2px black; */
     background-color: white;
-    box-shadow: 0 0 20px white;
+    box-shadow: 0 0 20px grey;
 }
