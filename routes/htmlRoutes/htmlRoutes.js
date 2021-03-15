@@ -51,13 +51,6 @@ router.get('/employers/viewjob/:jobid', isAuthenticated, (req,res) => {
         })
         .then((data) => {
             const userId = data.Company.User.id;
-            console.log(data);
-            console.log(`\n\nThis is User Id: ${userId}\n\n`);
-            // return companyId;
-            return Promise.resolve(userId)
-        })
-        .then((userId) => {
-            // console.log(id);
             if(userId == req.user.id){
                 return db.Company.findOne({
                     where: {UserId: req.user.id}, 
