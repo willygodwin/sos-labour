@@ -65,19 +65,22 @@ module.exports = function(app) {
       // req.body.whitecard, req.body.skills_experience)
       // console.log(req.body.img_reference, req.body.base64IMG)
 
-      const imgContents = req.body.base64IMG.split(',')[1];
+      const imgContents = req.body.base64IMG?.split(',')[1];
 
-      if (typeof Buffer.from === "function") {
-        // Node 5.10+
-        buf = Buffer.from(imgContents, 'base64'); // Ta-da
-      } else {
-        // older Node versions, now deprecated
-        buf = new Buffer(imgContents, 'base64'); // Ta-da
+      if(imgContents !== undefined){
+
+        if (typeof Buffer.from === "function") {
+          // Node 5.10+
+          buf = Buffer.from(imgContents, 'base64'); // Ta-da
+        } else {
+          // older Node versions, now deprecated
+          buf = new Buffer(imgContents, 'base64'); // Ta-da
+        }
+        fs.writeFile(path.join(__dirname, "..", "public", "asset", "images", req.body.img_reference), buf, err => {
+          console.log(err)
+          //
+          })
       }
-      fs.writeFile(path.join(__dirname, "..", "public", "asset", "images", req.body.img_reference), buf, err => {
-        console.log(err)
-        //
-        })
 
     db.Labourer.create({
       first_name: req.body.first_name,
@@ -90,7 +93,7 @@ module.exports = function(app) {
       img_reference: req.body.img_reference
     })
       .then(function() {
-        res.redirect("/");
+        res.redirect("/usercheck");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -105,7 +108,7 @@ module.exports = function(app) {
       UserId: req.body.UserId
     })
       .then(function() {
-        res.redirect("/");
+        res.redirect("/usercheck");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -115,7 +118,7 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
-    res.redirect("/");
+    res.redirect("/usercheck");
   });
 
   // Route for getting some data about our user to be used client side

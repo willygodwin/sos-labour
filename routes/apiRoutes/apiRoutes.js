@@ -132,6 +132,27 @@ router.delete('/api/resignapplication/:jobAddress',(req,res) => {
     .catch((err) => console.log(err))
 })
 
+router.get('/api/employers/calendar', (req,res) =>{
+    db.Company.findOne({
+        where: {UserId: req.user.id},
+        include: {
+            model:db.Job,
+            where: {job_status: 'closed'}
+        },
+    })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err))
+})
+
+router.get('/api/labourers/calendar', (req,res) => {
+    db.Applied.findAll({
+        where: {UserId: req.user.id, chosen: true },
+        include: db.Job
+    })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err))
+})
+
 const mailChosenApplicants = (data) =>{
     const labourerEmail = data.dataValues.email
     console.log("sucesss")

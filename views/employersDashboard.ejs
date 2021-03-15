@@ -8,10 +8,16 @@
             <%- include('partials/sidebar' , {highlightDashboard: 'highlight', highlightViewJob: '', highlightPostJob:'', name: `${name}` }) %>
     </div>
     <main class="col-sm-10" id="mainCol">
-  
+      <div class="sub-header">
+        <span class="sub-header-title active-tab" id="summary-text">Summary</span>
+        <span class="sub-header-title" id="calendar-text">Calendar</span>
+      </div>
+      
       <div class="dashboard-header">Upcoming Works</div>
+      
       <div class="row postedJobs">
-        <%_ for (let job of jobs){ _%>
+        <%_ if(jobs.length !== 0){ _%>
+          <%_ for (let job of jobs){ _%>
             <div class="col-sm-4">
               <div class="card jobCard" >
                 <div class="card-header closedStatus">
@@ -59,13 +65,14 @@
                       <%_ } _%>
                       <div class="number-of-labourers"> + <%= job.Applieds.length - 2 %> more labourers</div>
                     <%_ } _%>
-                  <!-- <p class="card-text" title="start date"><i class="far fa-calendar-check startDate"></i>: <%# job.start_date %> </p>
-                  <p class="card-text" title="end date"><i class="far fa-calendar-times endDate"></i>: <%# job.end_date %> </p> -->
-                  <!-- <p class="card-text" title="site manager"><i class="far fa-id-badge siteManager"></i>: <%# job.site_manager %> </p> -->
-                </div>  <!-- <p class="card-text">Number of Applicants: <%# job.Applieds.length %> </p> -->
+                </div>  
               </div>
             </div> 
         <%_ } _%>
+      <%_ } else { _%>
+        <div class="no-jobs-text-dashboard"> You have no upcoming works. Navigate to "Post Job" on the sidebar to create a new job</div>
+      <%_ } _%>
+
       </div>  
     </main>        
   </div>

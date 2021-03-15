@@ -43,6 +43,7 @@ const deleteJob = (job) =>
         },  
         body: JSON.stringify(job)
     }); 
+
 const applicantschosen = (users,jobId) =>
     fetch(`/api/applicantschosenfor/${jobId}`,{
         method: 'PUT',
@@ -52,15 +53,6 @@ const applicantschosen = (users,jobId) =>
         body: JSON.stringify(users)
     });
     
-// const handleBackBtn = () => {
-//     const backBtn = document.querySelector('#backToDashboard');
-//     backBtn.addEventListener('click', (e) => {
-//         e.preventDefault();
-//         const origin = window.location.origin;
-//         location.href = `${origin}/employers/dashboard`;
-//     });
-// }
-
 const handleEditBtn = () => {
     const editBtn = document.querySelector('#editJob');
     if(editBtn !== null){
@@ -102,16 +94,36 @@ const handleDeleteBtn = () => {
         deleteBtn.addEventListener('click',(e) => {
             e.preventDefault();
             const jobId = e.currentTarget.getAttribute('data-jobid');
-            const confirmDelete = confirm(`Do you want to delete Job ID: ${jobId}?`)
-            if (confirmDelete){
-                const job = {id: jobId}
-                deleteJob(job)
-                .then(() => {
-                    const origin = window.location.origin;
-                    location.href = `${origin}/employers/dashboard`
-                })
-                .catch((err) => console.log(err));
-            }
+            let divEl = document.createElement('div');
+            divEl.innerHTML = ` Do you want to delete this job? <span id="confirm-delete"><button id="yes-btn">YES</button><button id=""no-btn>NO</button></span>`
+            e.currentTarget.insertAdjacentElement("afterend",divEl);
+            let confirmDelete = document.querySelector('#confirm-delete');
+            confirmDelete.addEventListener('click', (e) => {
+                e.preventDefault();
+                let value = e.target.textContent;
+                if (value == 'YES'){
+                    const job = {id: jobId}
+                    deleteJob(job)
+                    .then(() => {
+                        const origin = window.location.origin;
+                        location.href = `${origin}/employers/dashboard`
+                    })
+                    .catch((err) => console.log(err));
+                }else{
+                    window.location.reload();
+                }
+            })
+
+            // const confirmDelete = confirm(`Do you want to delete Job ID: ${jobId}?`)
+            // if (confirmDelete){
+            //     const job = {id: jobId}
+            //     deleteJob(job)
+            //     .then(() => {
+            //         const origin = window.location.origin;
+            //         location.href = `${origin}/employers/dashboard`
+            //     })
+            //     .catch((err) => console.log(err));
+            // }
         });
     }
 }
@@ -210,16 +222,6 @@ const handlePostJobSidebar = () => {
 }
 
 
-// const handlePostNewJobBtn = () => {
-//     const postJobBtn = document.querySelector('.postJobBtn');
-//     postJobBtn.addEventListener('click', (e) => {
-//         e.preventDefault();
-//         const origin = window.location.origin;
-//         location.href = `${origin}/employers/postnewjob`
-
-//     })
-// }
-
 const postJob = (job) => 
     fetch(`/api/postnewjob`,{
         method: 'POST',
@@ -230,6 +232,11 @@ const postJob = (job) =>
     });
 
 
+const validatePostJobForms = (data) => {
+    if (data.address.trim == ''){
+        
+    }
+}
 const handleSubmitNewJobBtn = () => {
     const submitJob = document.querySelector('#submitNewJobBtn')
     submitJob.addEventListener('click',(e) => {
@@ -248,32 +255,71 @@ const handleSubmitNewJobBtn = () => {
         postJob(newJobData)
         .then(() => {
             const origin = window.location.origin;
-            location.href = `${origin}/employers/dashboard`;
+            location.href = `${origin}/employers/viewpostedjobs`;
         })
         .catch((err) => console.log(err));
     })
+}
+
+const handleSummaryTab = () => {
+    let summary = document.querySelector('#summary-text');
+    summary.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/employers/dashboard`
+
+    })
+}
+const handleCalendarTab = () => {
+    let calendar = document.querySelector('#calendar-text');
+    calendar.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/employers/dashboard/calendar`
+
+    })
+}
+
+const setMinDate = () => {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+    let minDate = `${yyyy}-${mm}-${dd}`;
+    document.querySelector('#start-date').setAttribute('min',minDate);
+    document.querySelector('#end-date').setAttribute('min',minDate);
 }
 
 handleDashboardSidebar();
 handleViewPostedJobSidebar();
 handlePostJobSidebar();
 
-// JS to run when rendering HTML /employers/dashboard
+// JS to run when rendering HTML specific HTML
 if (window.location.pathname === '/employers/dashboard'){
-    handleViewJobBtn(); 
-    // handlePostNewJobBtn();
+    handleViewJobBtn();
+    handleCalendarTab();
     handleMapIcon();
+} else if (window.location.pathname === '/employers/dashboard/calendar') {
+    handleSummaryTab();
 } else if (window.location.pathname === '/employers/postnewjob'){
     handleSubmitNewJobBtn();
+    setMinDate();
 } else if(window.location.pathname === '/employers/viewpostedjobs'){
     handleMapIcon();
     handleViewJobBtn(); 
 } else{
-    // handleBackBtn();
     handleEditBtn();
     handleDeleteBtn();
     handleSelectUserBtn();
     handleChoseApplicantsBtn();
+    setMinDate();
 }
 
 

@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     skills_experience: skillsInput.value.trim(),
                     UserId: data.id, 
                     base64IMG: file,
-                    img_reference: profilePicInput.files[0].name
+                    img_reference: profilePicInput.files[0]?.name
 
 
 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Reload the page so the user can see the new quote
                 if (response.ok) {
                     
-                    window.location.href = "/"; // if all good have to send the user to their dashboard
+                    window.location.href = "/usercheck"; // if all good have to send the user to their dashboard
 
                     // If there's an error, log the error
                 } else {
@@ -120,10 +120,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function getBase64(file) {
         return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = error => reject(error);
+            
+            if(typeof file !== Blob){
+                return resolve();
+            }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
         });
     }
 

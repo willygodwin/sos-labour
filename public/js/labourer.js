@@ -62,15 +62,43 @@ const handleMapIcon =() => {
     })
 }
 
+const handleSummaryTab = () => {
+    let summary = document.querySelector('#summary-text');
+    summary.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/labourers/dashboard`
+
+    })
+}
+const handleCalendarTab = () => {
+    let calendar = document.querySelector('#calendar-text');
+    calendar.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/labourers/dashboard/calendar`
+
+    })
+}
+
 handleDashboardSidebar();
 handleViewAppliedJob();
 handleSearchJobSidebar();
 
 if (window.location.pathname === '/labourers/dashboard'){
     handleMapIcon();
+    handleCalendarTab();
 }    
+
+if (window.location.pathname === '/labourers/dashboard/calendar'){
+    handleSummaryTab();
+}
 
 if (window.location.pathname === '/labourers/viewappliedjob'){
     handleResignBtn();
+    handleMapIcon();
+}
+
+if(window.location.pathname === '/labourers/jobsearch'){
     handleMapIcon();
 }
