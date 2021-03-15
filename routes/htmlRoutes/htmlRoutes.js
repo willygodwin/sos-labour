@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const fs = require('fs');
 const db = require(path.join(__dirname,'..','..','models'));
 const isAuthenticated = require(path.join(__dirname,'..','..','config','middleware','isAuthenticated'));
 const { Op } = require("sequelize");
@@ -41,13 +42,16 @@ router.get('/employers/dashboard', isAuthenticated, (req,res) => {
 // html route to display specific job posted by employer/company
 router.get('/employers/viewjob/:jobid', isAuthenticated, (req,res) => {
     if(req.user.user_type == 'company'){
-        db.Job.findOne({where: {id:req.params.jobid}})
-        .then((data) => {
-            const companyId = data.dataValues.CompanyId;
-            return companyId
+        db.Job.findOne({
+            where: {id:req.params.jobid},
+            include: {
+                model: db.Company,
+                include: db.User
+            }
         })
-        .then((id) => {
-            if(id == req.user.id){
+        .then((data) => {
+            const userId = data.Company.User.id;
+            if(userId == req.user.id){
                 return db.Company.findOne({
                     where: {UserId: req.user.id}, 
                     include: {
@@ -73,7 +77,8 @@ router.get('/employers/viewjob/:jobid', isAuthenticated, (req,res) => {
         }))
         .catch((err) => {
             console.log(err);
-            res.redirect('/');
+            fs.writeFileSync('err.log', err);
+            res.redirect('/usercheck');
         });
         
     }else{
@@ -88,8 +93,7 @@ router.get('/employers/postnewjob', isAuthenticated, (req,res) => {
         .catch((err) => console.log(err));
     }
     else{
-        console.log('redirect');
-        res.redirect('/');
+        res.redirect('/usercheck');
     }
 });
 
@@ -115,7 +119,7 @@ router.get('/employers/viewpostedjobs', isAuthenticated, (req,res) => {
         }))
         .catch((err) => console.log(err));
     }else{
-        res.redirect('/');
+        res.redirect('/usercheck');
     }
 })
 
@@ -145,7 +149,7 @@ router.get('/labourers/dashboard', isAuthenticated, (req,res) => {
         })
         .catch((err) => console.log(err));
     } else {
-        res.redirect('/')
+        res.redirect('/usercheck')
     }
     
 });
@@ -177,7 +181,7 @@ router.get('/labourers/viewappliedjob', isAuthenticated, (req,res) => {
         })
         .catch((err) => console.log(err));
     } else {
-        res.redirect ('/');
+        res.redirect ('/usercheck');
     }
     
 })
@@ -209,7 +213,36 @@ router.get('/labourers/jobsearch', isAuthenticated, (req,res) => {
         })
         .catch((err) => console.log(err));
     } else {
-        res.redirect ('/');
+        res.redirect ('/usercheck');
+    }
+})
+
+router.get('/employers/dashboard/calendar', isAuthenticated, (req,res) => {
+    if(req.user.user_type == 'company'){
+        db.Company.findOne({
+            where: {UserId: req.user.id}, 
+        })   
+        .then((data) => res.render('employersCalendar',{
+            name: data.dataValues.company_name,
+        }))
+        .catch((err) => console.log(err));
+    }else{
+        res.redirect('/usercheck');
+    }
+})
+
+router.get('/labourers/dashboard/calendar', isAuthenticated, (req,res) => {
+    if(req.user.user_type == 'labourer'){
+        db.Labourer.findOne({
+            where: {UserId: req.user.id}, 
+        })   
+        .then((data) => res.render('labourerCalendar',{
+            name: data.first_name + " " + data.last_name,
+            image: data.img_reference
+        }))
+        .catch((err) => console.log(err));
+    }else{
+        res.redirect('/usercheck');
     }
 })
 

@@ -25,34 +25,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% let hash = 1 %>
-                        <%_ for (let job of jobs){ _%>
-                            <%_ if (job.job_status == 'closed'){ _%>
-                                <tr >
-                                    <th scope="row" class ="job-status-closed"><%= hash %></th>
-                                    <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
-                                    <td><%= job.start_date.split("-").reverse().join("-") %></td>
-                                    <td><%= job.end_date.split("-").reverse().join("-") %></td>
-                                    <td><%= job.site_manager %></td>
-                                    <td><%= job.number_of_labourers %></td>
-                                    <td>Closed</td>
-                                    <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
-                                </tr>
-                            <%_ } else { _%>
-                                <tr >
-                                    <th scope="row" class ="job-status-open"><%= hash %></th>
-                                    <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
-                                    <td><%= job.start_date.split("-").reverse().join("-") %></td>
-                                    <td><%= job.end_date.split("-").reverse().join("-") %></td>
-                                    <td><%= job.site_manager %></td>
-                                    <td><%= job.number_of_labourers %></td>
-                                    <td><%= job.Applieds.length %></td>
-                                    <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
-                                </tr>
+                        <%_ if (jobs.length !== 0) { _%>
+                            <% let hash = 1 %>
+                            <%_ for (let job of jobs){ _%>
+                                <%_ if (job.job_status == 'closed'){ _%>
+                                    <tr >
+                                        <th scope="row" class ="job-status-closed"><%= hash %></th>
+                                        <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
+                                        <td><%= job.start_date.split("-").reverse().join("-") %></td>
+                                        <td><%= job.end_date.split("-").reverse().join("-") %></td>
+                                        <td><%= job.site_manager %></td>
+                                        <td><%= job.number_of_labourers %></td>
+                                        <td>Closed</td>
+                                        <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
+                                    </tr>
+                                <%_ } else { _%>
+                                    <tr >
+                                        <th scope="row" class ="job-status-open"><%= hash %></th>
+                                        <td><%= `${job.address}, ${job.suburb}, ${job.city}, ${job.state}, ${job.postcode}` %></td>
+                                        <td><%= job.start_date.split("-").reverse().join("-") %></td>
+                                        <td><%= job.end_date.split("-").reverse().join("-") %></td>
+                                        <td><%= job.site_manager %></td>
+                                        <td><%= job.number_of_labourers %></td>
+                                        <td><%= job.Applieds.length %></td>
+                                        <td><button class="view-job-btn" data-jobid="<%= job.id%>">View Job</button></td>
+                                    </tr>
+                                <%_ } _%>
+                                        
+                                <% hash++ %>
                             <%_ } _%>
-                                    
-                            <% hash++ %>
+                        <%_ } else { _%>
+                            <th scope="row"></th>
+                            <td class="no-jobs-text-viewpostedjobs"> You have not posted any job.</td>
                         <%_ } _%>
+                        
                     </tbody>
                 </table>
             </div>

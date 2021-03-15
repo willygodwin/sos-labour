@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         // Check that the response is all good
                         // Reload the page so the user can see the new quote
                         if (response.ok) {
-                            window.location.replace("/");
+                            window.location.replace("/usercheck");
                             // If there's an error, log the error
                         } else {
                             // alert('something went wrong!');

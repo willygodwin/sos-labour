@@ -8,7 +8,7 @@ const db = require("../models");
 
 module.exports = function(app) {
 
-  app.get("/", isAuthenticated, function(req, res) {
+  app.get("/usercheck", isAuthenticated, function(req, res) {
     db.User.findOne({where: {id: req.user.id}})
     .then((data) => {
       // console.log(data);
@@ -52,7 +52,7 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/labourerdetails.html"));
   });
 
-  app.get("/home", function(req,res) {
+  app.get("/", function(req,res) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
   })
 
@@ -63,6 +63,8 @@ module.exports = function(app) {
   app.get("/contact", function(req,res) {
     res.sendFile(path.join(__dirname, "../public/contact.html"));
   })
+
+  
 
 
 };
