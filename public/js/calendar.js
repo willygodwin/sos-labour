@@ -28,7 +28,7 @@ const renderEmployersCalendar = (data) => {
       initialView: 'dayGridMonth',
       events: data,
       eventClick: function(info) {
-        const jobId = info.event.jobId;
+        const jobId = info.event.extendedProps.jobId;
         const origin = window.location.origin;
         location.href = `${origin}/employers/viewjob/${jobId}`
       },
@@ -80,15 +80,15 @@ const parsingLabourersCalendarData = (data) => {
         //   const origin = window.location.origin;
         //   location.href = `${origin}/employers/viewjob/${jobId}`
         // },
-        eventMouseEnter: function(mouseEnterInfo){
-          mouseEnterInfo.el.style.cursor = 'pointer'
-          mouseEnterInfo.el.style.borderColor = 'grey';
-          mouseEnterInfo.el.style.backgroundColor = 'grey';
-        },  
-        eventMouseLeave: function(mouseLeaveInfo){
-          mouseLeaveInfo.el.style.borderColor = null;
-          mouseLeaveInfo.el.style.backgroundColor = null;
-        },  
+        // eventMouseEnter: function(mouseEnterInfo){
+        //   mouseEnterInfo.el.style.cursor = 'pointer'
+        //   mouseEnterInfo.el.style.borderColor = 'grey';
+        //   mouseEnterInfo.el.style.backgroundColor = 'grey';
+        // },  
+        // eventMouseLeave: function(mouseLeaveInfo){
+        //   mouseLeaveInfo.el.style.borderColor = null;
+        //   mouseLeaveInfo.el.style.backgroundColor = null;
+        // },  
       });
       calendar.render();
   }   
