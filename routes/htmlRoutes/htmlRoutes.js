@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const fs = require('fs');
 const db = require(path.join(__dirname,'..','..','models'));
 const isAuthenticated = require(path.join(__dirname,'..','..','config','middleware','isAuthenticated'));
 const { Op } = require("sequelize");
@@ -41,13 +42,23 @@ router.get('/employers/dashboard', isAuthenticated, (req,res) => {
 // html route to display specific job posted by employer/company
 router.get('/employers/viewjob/:jobid', isAuthenticated, (req,res) => {
     if(req.user.user_type == 'company'){
-        db.Job.findOne({where: {id:req.params.jobid}})
-        .then((data) => {
-            const companyId = data.dataValues.CompanyId;
-            return companyId
+        db.Job.findOne({
+            where: {id:req.params.jobid},
+            include: {
+                model: db.Company,
+                include: db.User
+            }
         })
-        .then((id) => {
-            if(id == req.user.id){
+        .then((data) => {
+            const userId = data.Company.User.id;
+            console.log(data);
+            console.log(`\n\nThis is User Id: ${userId}\n\n`);
+            // return companyId;
+            return Promise.resolve(userId)
+        })
+        .then((userId) => {
+            // console.log(id);
+            if(userId == req.user.id){
                 return db.Company.findOne({
                     where: {UserId: req.user.id}, 
                     include: {
@@ -73,6 +84,7 @@ router.get('/employers/viewjob/:jobid', isAuthenticated, (req,res) => {
         }))
         .catch((err) => {
             console.log(err);
+            fs.writeFileSync('err.log', err);
             res.redirect('/usercheck');
         });
         
