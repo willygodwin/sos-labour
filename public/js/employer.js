@@ -254,15 +254,37 @@ const handleSubmitNewJobBtn = () => {
     })
 }
 
+const handleSummaryTab = () => {
+    let summary = document.querySelector('#summary-text');
+    summary.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/employers/dashboard`
+
+    })
+}
+const handleCalendarTab = () => {
+    let calendar = document.querySelector('#calendar-text');
+    calendar.addEventListener('click', (e) => {
+        e.preventDefault();
+        const origin = window.location.origin;
+        location.href = `${origin}/employers/dashboard/calendar`
+
+    })
+}
+
 handleDashboardSidebar();
 handleViewPostedJobSidebar();
 handlePostJobSidebar();
 
 // JS to run when rendering HTML /employers/dashboard
 if (window.location.pathname === '/employers/dashboard'){
-    handleViewJobBtn(); 
+    handleViewJobBtn();
+    handleCalendarTab();
     // handlePostNewJobBtn();
     handleMapIcon();
+} else if (window.location.pathname === '/employers/dashboard/calendar') {
+    handleSummaryTab();
 } else if (window.location.pathname === '/employers/postnewjob'){
     handleSubmitNewJobBtn();
 } else if(window.location.pathname === '/employers/viewpostedjobs'){

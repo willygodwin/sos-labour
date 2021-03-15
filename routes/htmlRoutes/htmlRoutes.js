@@ -213,6 +213,35 @@ router.get('/labourers/jobsearch', isAuthenticated, (req,res) => {
     }
 })
 
+router.get('/employers/dashboard/calendar', isAuthenticated, (req,res) => {
+    if(req.user.user_type == 'company'){
+        db.Company.findOne({
+            where: {UserId: req.user.id}, 
+        })   
+        .then((data) => res.render('employersCalendar',{
+            name: data.dataValues.company_name,
+        }))
+        .catch((err) => console.log(err));
+    }else{
+        res.redirect('/');
+    }
+})
+
+router.get('/labourers/dashboard/calendar', isAuthenticated, (req,res) => {
+    if(req.user.user_type == 'labourer'){
+        db.Labourer.findOne({
+            where: {UserId: req.user.id}, 
+        })   
+        .then((data) => res.render('labourerCalendar',{
+            name: data.first_name + " " + data.last_name,
+            image: data.img_reference
+        }))
+        .catch((err) => console.log(err));
+    }else{
+        res.redirect('/');
+    }
+})
+
 
 
 module.exports = router

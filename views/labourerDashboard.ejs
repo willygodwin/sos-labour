@@ -8,6 +8,10 @@
             <%- include('partials/sidebar-labourer', {highlightDashboard: 'highlight', highlightAppliedJob: '', highlightSearchJob:'', name: `${name}` }) %>
     </div>
     <div class="col-sm-10" id="mainCol">
+      <div class="sub-header">
+        <span class="sub-header-title active-tab" id="summary-text">Summary</span>
+        <span class="sub-header-title" id="calendar-text">Calendar</span>
+      </div>
   
       <div class="dashboard-header">Upcoming Job</div>
       <div class=" row postedJobs">
@@ -19,7 +23,7 @@
                   <div>
                     <p class="card-header-text">Upcoming Job</p>
                   </div>
-                  <button class="view-job-btn" data-jobid="<%= job.Job.id %>"> View Job</button>
+                  <!-- <button class="view-job-btn" data-jobid="<%# job.Job.id %>"> View Job</button> -->
               </div>
               <div class="card-body dashboard-cardBody">
                 <div class="job-address">

@@ -132,6 +132,49 @@ body{
     background-position-x: -17.5rem;
 }
 
+.sub-header{
+    margin: 1rem 2rem 1rem 2rem;
+    /* padding: 1rem; */
+    border-bottom: 1px solid rgb(184, 184, 184);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 0;
+
+}
+
+.sub-header-title{
+    cursor: pointer;
+    /* border-top-left-radius: 5px; */
+    /* border-top-right-radius: 5px; */
+    padding: 0.5rem 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color:grey;
+    margin-bottom: 0;
+    position: relative;
+    top: 1px;
+}
+
+.sub-header-title:hover{
+    color:#007ee6;
+    font-weight: 600;
+}
+
+.active-tab{
+    background-color: rgb(184, 184, 184);
+    color:white;
+    font-weight: 600;
+    text-shadow: 0 0 1px black;
+    cursor: default;
+}
+
+.active-tab:hover{
+    color:white;
+    text-shadow: 0 0 1px black;
+}
+
 .dashboard-header{
     /* border: 1px solid black; */
     border-radius: 5px;
@@ -251,7 +294,7 @@ hr {
 /* view applied jobs html */
 
 .view-posted-jobs-card{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 2rem;
     background-color: white;
     box-shadow: 0 0 15px rgb(190, 189, 189);
@@ -331,4 +374,18 @@ td > .map-icon{
     color: #007ee6;
     font-weight: 500;
     box-shadow: 0 0 10px rgb(66, 66, 66);
+}
+
+/* calendar */
+#calendar{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 1rem 2rem;
+    padding: 1rem;
+    /* font-weight: 700;
+    font-size: 1.2rem; */
+    /* color: white; */
+    /* text-shadow: 1px 1px 2px black; */
+    background-color: white;
+    box-shadow: 0 0 20px white;
 }
