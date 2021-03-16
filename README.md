@@ -23,6 +23,7 @@ This is a Node.JS web application that connects construction companies and labou
 Access the web application by clicking this [link](https://project2-will.herokuapp.com/) which should take you the the home page.
 
 ![Screenshoot of Home Page](public\asset\screenshots\home-page.PNG)
+![Alt text](public\asset\screenshots\home-page.PNG?raw=true "home") 
 
 ---
 ### As Company:
